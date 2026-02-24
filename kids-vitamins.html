@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kids Vitamins – Vitamines pour enfants</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+    }
+    h1 { color: #2e7d32; }
+    h2 { margin-top: 30px; }
+
+    .badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 15px 0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 15px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #1976d2;
+      font-size: 15px;
+    }
+
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🌍 Bouton traduction -->
+<div style="position:fixed;top:15px;right:15px;z-index:3000;">
+  <button onclick="translateToArabic()" style="
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    background:#2e7d32;
+    color:white;
+    font-size:14px;
+    cursor:pointer;">
+    🌍 العربية
+  </button>
+</div>
+
+<div class="container">
+
+  <div class="badge">
+    ✅ Produit original – Vitamines pour enfants<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Kids Vitamins</h1>
+  <p><strong>Vitamines essentielles pour renforcer l’immunité et la croissance des enfants.</strong></p>
+
+  <img src="https://i.postimg.cc/FKr9z2bn/Screenshot-20260219-094029-Google.jpg"
+       class="product-img"
+       alt="Kids Vitamins">
+
+  <h2>Pourquoi choisir Kids Vitamins ?</h2>
+  <ul>
+    <li>✔️ Soutient le système immunitaire</li>
+    <li>✔️ Aide à la croissance et à l’énergie</li>
+    <li>✔️ Goût agréable, facile à prendre</li>
+    <li>✔️ Formule adaptée aux enfants</li>
+  </ul>
+
+  <p>👶 Convient aux enfants de <strong>4 à 18 ans</strong></p>
+
+  <div class="price">Prix unitaire : 227 DH</div>
+
+  <h2>Conseils d’utilisation</h2>
+  <p>Enfants à partir de 4 ans.<br><strong>Sucer ou croquer 4 comprimés par jour.</strong></p>
+
+  <h2>Commande</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">Total : <span id="total">227</span> DH</div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
+    Voir tous nos autres produits
+  </a>
+<hr>
+
+<div style="font-size:14px; line-height:1.7; color:#333; margin-top:30px;">
+
+  <h2 style="color:#2e7d32;">Vitamines Enfants Kids Forever</h2>
+
+  <p>
+    <strong>Complément alimentaire destiné aux enfants</strong>, apportant fer, zinc,
+    magnésium et vitamines essentielles.
+  </p>
+
+  <p>
+    Ce produit est conçu pour accompagner les enfants
+    <strong>à partir de 4 ans jusqu’à la fin de l’adolescence</strong>,
+    ainsi que les jeunes adultes, notamment en période de fatigue passagère,
+    de rythme scolaire soutenu ou de besoins nutritionnels accrus.
+  </p>
+
+  <p>
+    Kids Forever contient <strong>12 vitamines essentielles et 2 minéraux</strong>,
+    qui participent au bon fonctionnement de l’organisme.
+    Il contribue à aider les enfants à faire face à la fatigue,
+    à soutenir leur vitalité et à accompagner leur développement global.
+  </p>
+
+  <p>
+    Son <strong>goût agréable de fraise</strong> le rend facile à prendre
+    et apprécié par les enfants.
+  </p>
+
+  <h3>Bienfaits de Kids Forever Enfant</h3>
+  <ul>
+    <li>Aide en cas de fatigue passagère ou chronique chez l’enfant</li>
+    <li>Soutient les enfants ayant un rythme scolaire soutenu</li>
+    <li>Accompagne les périodes de manque de sommeil</li>
+    <li>Complète une alimentation déséquilibrée</li>
+    <li>Contribue au bon développement de l’attention, de la mémoire,
+        du langage et des fonctions visuo-spatiales</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+  <h3>Rôle des vitamines et minéraux</h3>
+
+  <p>
+    <strong>Vitamines du groupe B (B1, B2, B3, B5, B6, B8, B9 et B12)</strong> :
+    jouent un rôle essentiel dans le métabolisme des cellules.
+    Elles contribuent également au métabolisme du fer et à la réduction de la fatigue.
+  </p>
+
+  <ul>
+    <li><strong>Vitamine B1 :</strong> métabolisme énergétique et système nerveux</li>
+    <li><strong>Vitamine B2 :</strong> vision normale et protection contre le stress oxydatif</li>
+    <li><strong>Vitamine B3 :</strong> fonctionnement normal du système nerveux</li>
+    <li><strong>Vitamine B5 :</strong> synthèse hormonale et neurotransmetteurs</li>
+    <li><strong>Vitamine B6 :</strong> soutien des défenses naturelles</li>
+    <li><strong>Biotine (B8) :</strong> peau, cheveux et muqueuses</li>
+    <li><strong>Vitamine B9 & B12 :</strong> formation des globules rouges</li>
+  </ul>
+
+  <p>
+    <strong>Vitamine C :</strong> contribue à la formation du collagène
+    (os, dents, cartilages, gencives, peau et vaisseaux sanguins).
+  </p>
+
+  <p>
+    <strong>Vitamine D :</strong> participe au bon fonctionnement du système immunitaire.
+  </p>
+
+  <p>
+    <strong>Vitamine E :</strong> aide à protéger les cellules contre le stress oxydatif.
+  </p>
+
+  <p>
+    <strong>Fer :</strong> contribue à la réduction de la fatigue chronique.<br>
+    <strong>Zinc :</strong> participe aux défenses naturelles, à la vision,
+    à la division cellulaire et à la fonction cognitive normale.
+  </p>
+
+  <h3>Composition du produit</h3>
+  <ul>
+    <li>Contenance : <strong>120 comprimés</strong></li>
+    <li>12 vitamines + fer et zinc</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+  <h3>Conseils d’utilisation</h3>
+  <p>
+    Enfants à partir de 4 ans et jeunes adultes.<br>
+    <strong>Sucer ou croquer 4 comprimés par jour.</strong>
+  </p>
+
+  <p style="font-size:13px; color:#666;">
+    Complément alimentaire. Ne remplace pas une alimentation variée et équilibrée
+    ni un mode de vie sain.<br>
+    Ne pas dépasser la dose journalière recommandée.<br>
+    Tenir hors de portée des enfants.
+  </p>
+
+</div>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
+
+</div>
+
+<!-- Google Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    { pageLanguage: 'fr', includedLanguages: 'fr,ar' },
+    'google_translate_element'
+  );
+}
+
+function translateToArabic(){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){ select.value = "ar"; select.dispatchEvent(new Event("change")); }
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+const unitPrice = 227;
+let cartQty = 0;
+
+function updateTotal() {
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
+}
+
+function addToCart() {
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Kids Vitamins</strong><br>Quantité : " + cartQty +
+    "<br>Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp() {
+  if(cartQty === 0){ alert("Veuillez ajouter le produit au panier."); return; }
+  const msg =
+    "Commande Kids Vitamins%0AQuantité : "+cartQty+
+    "%0ATotal : "+(cartQty*unitPrice)+" DH";
+  window.open("https://wa.me/212752789277?text="+msg,"_blank");
+}
+</script>
+<hr>
+
+
+</body>
+</html>
