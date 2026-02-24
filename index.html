@@ -94,4 +94,134 @@
 </div>
 
 </body>
+  <!-- ===== MENU ÉQUILIBRE VITAL ===== -->
+<style>
+/* Bouton hamburger */
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 26px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 1001;
+}
+
+/* Menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100%;
+  background: #ffffff;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu h3 {
+  color: #2e7d32;
+  margin-top: 20px;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.side-menu li {
+  margin: 6px 0;
+}
+
+.side-menu a {
+  text-decoration: none;
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Fermer */
+.close-menu {
+  font-size: 24px;
+  float: right;
+  cursor: pointer;
+}
+</style>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<nav class="side-menu" id="menu">
+  <span class="close-menu" onclick="toggleMenu()">✖</span>
+
+  <h3>Produits</h3>
+
+  <strong>Appareil digestif</strong>
+  <ul>
+    <li><a href="#">Gel d’Aloe Vera</a></li>
+    <li><a href="#">Pro-B</a></li>
+    <li><a href="#">Forever Fiber</a></li>
+    <li><a href="#">Fields of Greens</a></li>
+  </ul>
+
+  <strong>Hygiène & soins de la peau</strong>
+  <ul>
+    <li><a href="#">Aloe Moisturizing Lotion</a></li>
+    <li><a href="#">Thermogen (pommade)</a></li>
+    <li><a href="#">Propolis Crème</a></li>
+    <li><a href="#">Activateur</a></li>
+  </ul>
+
+  <strong>Gestion du poids</strong>
+  <ul>
+    <li><a href="#">Forever Therm</a></li>
+    <li><a href="#">Forever Lite Ultra</a></li>
+  </ul>
+
+  <strong>Os & articulations</strong>
+  <ul>
+    <li><a href="#">Forever Calcium</a></li>
+  </ul>
+
+  <strong>Immunité & vitalité</strong>
+  <ul>
+    <li><a href="#">Propolis</a></li>
+    <li><a href="#">Forever Bee Pollen</a></li>
+    <li><a href="#">Vitolize Men</a></li>
+    <li><a href="#">Kids Vitamins</a></li>
+    <li><a href="#">Bee Honey</a></li>
+    <li><a href="#">Berry Nectar</a></li>
+    <li><a href="#">Forever Daily</a></li>
+  </ul>
+
+  <h3>Programmes / Protocoles</h3>
+  <ul>
+    <li><a href="colon-irritable.html">Côlon irritable</a></li>
+    <li><a href="gestion-poids.html">Gestion du poids</a></li>
+    <li><a href="plan-detox.html">Plan Détox</a></li>
+    <li><a href="migraine.html">Gestion de la migraine</a></li>
+    <li><a href="prostate.html">Gestion de la prostate</a></li>
+  </ul>
+
+  <h3>Contact</h3>
+  <ul>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">À propos</a></li>
+  </ul>
+</nav>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("open");
+}
+</script>
+<!-- ===== FIN MENU ===== -->
 </html>
