@@ -94,6 +94,123 @@
 </div>
 
 </body>
+  <style>
+.menu-btn {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  font-size: 26px;
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 1001;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -320px;
+  width: 300px;
+  height: 100%;
+  background: #fff;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu.open { left: 0; }
+
+.close-menu {
+  font-size: 22px;
+  float: right;
+  cursor: pointer;
+}
+
+.menu-title {
+  font-weight: bold;
+  color: #2e7d32;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.menu-section {
+  display: none;
+  margin-left: 10px;
+}
+
+.menu-section a {
+  display: block;
+  color: #1a73e8;
+  text-decoration: none;
+  margin: 6px 0;
+}
+</style>
+
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<nav class="side-menu" id="menu">
+  <span class="close-menu" onclick="toggleMenu()">✖</span>
+
+  <div class="menu-title" onclick="toggleSection('produits')">Produits ▾</div>
+  <div class="menu-section" id="produits">
+
+    <strong>Appareil digestif</strong>
+    <a href="#">Gel d’Aloe Vera</a>
+    <a href="#">Pro-B</a>
+    <a href="#">Forever Fiber</a>
+    <a href="#">Fields of Greens</a>
+
+    <strong>Hygiène & soins</strong>
+    <a href="#">Aloe Moisturizing Lotion</a>
+    <a href="#">Thermogen (pommade)</a>
+    <a href="#">Propolis Crème</a>
+    <a href="#">Activateur</a>
+
+    <strong>Gestion du poids</strong>
+    <a href="#">Forever Therm</a>
+    <a href="#">Forever Lite Ultra</a>
+
+    <strong>Os & articulations</strong>
+    <a href="#">Forever Calcium</a>
+
+    <strong>Immunité & vitalité</strong>
+    <a href="#">Propolis</a>
+    <a href="#">Forever Bee Pollen</a>
+    <a href="#">Vitolize Men</a>
+    <a href="#">Kids Vitamins</a>
+    <a href="#">Bee Honey</a>
+    <a href="#">Berry Nectar</a>
+    <a href="#">Forever Daily</a>
+  </div>
+
+  <div class="menu-title" onclick="toggleSection('protocoles')">Programmes / Protocoles ▾</div>
+  <div class="menu-section" id="protocoles">
+    <a href="colon-irritable.html">Côlon irritable</a>
+    <a href="gestion-poids.html">Gestion du poids</a>
+    <a href="plan-detox.html">Plan Détox</a>
+    <a href="migraine.html">Gestion de la migraine</a>
+    <a href="prostate.html">Gestion de la prostate</a>
+  </div>
+
+  <div class="menu-title">Contact</div>
+  <a href="#">Contact</a>
+  <a href="#">À propos</a>
+</nav>
+
+<script>
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("open");
+}
+
+function toggleSection(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+</script>
   <!-- ===== MENU ÉQUILIBRE VITAL ===== -->
 <style>
 /* Bouton hamburger */
