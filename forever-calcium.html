@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever Calcium – Os, dents & muscles</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+    }
+    h1 { color: #2e7d32; }
+    h2 { margin-top: 30px; }
+
+    .badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 6px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 15px 0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 15px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #1976d2;
+      font-size: 15px;
+    }
+
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="badge">
+    🦴 Santé des os & des dents<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Forever Calcium</h1>
+  <p><strong>Complément alimentaire aidant à renforcer les os et les dents tout en soutenant la fonction musculaire.</strong></p>
+
+  <img src="https://i.postimg.cc/PfQbr3wr/Screenshot-20260223-134021-Google.jpg"
+       class="product-img"
+       alt="Forever Calcium">
+
+  <h2>Pourquoi choisir Forever Calcium ?</h2>
+  <ul>
+    <li>✔️ Contribue au maintien d’os solides</li>
+    <li>✔️ Aide à renforcer les dents</li>
+    <li>✔️ Soutient la fonction musculaire normale</li>
+    <li>✔️ Participe à la vitalité au quotidien</li>
+  </ul>
+
+  <p>
+    <strong>Forever Calcium</strong> est spécialement formulé pour accompagner les besoins
+    quotidiens en calcium, un minéral essentiel à la solidité du squelette
+    et au bon fonctionnement musculaire.
+  </p>
+
+  <div class="price">
+    Prix unitaire : 275 DH
+  </div>
+
+  <h2>Conseils d’utilisation</h2>
+  <p>
+    Prendre <strong>1 à 2 comprimés par jour</strong>, de préférence au cours d’un repas,
+    avec un grand verre d’eau.
+  </p>
+
+  <p>
+    <small>
+      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
+      Ne pas dépasser la dose journalière recommandée.
+    </small>
+  </p>
+
+  <h2>Commande</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">275</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="https://equilibrevitale.github.io/">
+    Voir tous nos autres produits
+  </a>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<script>
+const unitPrice = 275;
+let cartQty = 0;
+
+function updateTotal() {
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart() {
+  cartQty = document.getElementById("qty").value;
+  const total = cartQty * unitPrice;
+
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Calcium</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + total + " DH";
+}
+
+function sendWhatsApp() {
+  if (cartQty === 0) {
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const total = cartQty * unitPrice;
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Forever Calcium%0A" +
+    "Quantité : " + cartQty + " boîte(s)%0A" +
+    "Total : " + total + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse de livraison : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+</script>
+
+<hr>
+
+<section id="description-complete-calcium" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🟢 FOREVER CALCIUM – SOLIDITÉ OSSEUSE & MUSCULAIRE</h2>
+
+  <h3>🦴 Un minéral essentiel à chaque étape de la vie</h3>
+
+  <p>
+    Le calcium est un minéral indispensable à la construction et au maintien
+    de la structure osseuse et dentaire. Il joue également un rôle clé
+    dans la contraction musculaire et la transmission nerveuse.
+  </p>
+
+  <p>
+    Avec l’âge, le stress, certaines habitudes alimentaires ou des besoins accrus,
+    les apports en calcium peuvent devenir insuffisants.
+    <strong>Forever Calcium</strong> aide à compléter ces apports afin de préserver
+    la solidité osseuse et la vitalité au quotidien.
+  </p>
+
+  <h3>🌿 Une formule adaptée et bien assimilée</h3>
+
+  <p>
+    La formule de <strong>Forever Calcium</strong> est conçue pour offrir
+    une bonne biodisponibilité du calcium, facilitant son assimilation
+    par l’organisme et son utilisation par les os et les muscles.
+  </p>
+
+  <p>
+    Une supplémentation régulière contribue à soutenir la santé osseuse,
+    à réduire les risques de fragilisation et à maintenir une bonne fonction musculaire.
+  </p>
+
+  <h3>🧪 Informations produit</h3>
+
+  <p><strong>Référence :</strong> 394</p>
+  <p><strong>Forme :</strong> Comprimés</p>
+
+  <h3>📌 Conseils d’utilisation</h3>
+  <p>
+    Prendre <strong>1 à 2 comprimés par jour</strong>, de préférence au cours d’un repas.
+  </p>
+
+  <h3>💚 Bienfaits de Forever Calcium</h3>
+  <ul>
+    <li>Aide à maintenir des os solides</li>
+    <li>Contribue à la santé des dents</li>
+    <li>Soutient la fonction musculaire normale</li>
+    <li>Participe à la vitalité générale</li>
+    <li>Convient à une utilisation quotidienne</li>
+  </ul>
+
+</section>
+  <hr>
+
+<section id="complement-calcium-forever" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🦴 COMPLÉMENT DE CALCIUM</h2>
+
+  <h3>Maintien du capital osseux</h3>
+
+  <p>
+    Le calcium est un élément essentiel
+    pour le maintien d’os solides,
+    le bon fonctionnement des muscles
+    et du système sanguin.
+    Il contribue également
+    à limiter un stockage excessif
+    des lipides dans le tissu adipeux.
+  </p>
+
+  <p>
+    Un manque important de vitamines,
+    notamment la vitamine C,
+    peut fragiliser les os
+    jusqu’à favoriser
+    le développement de l’ostéoporose.
+    Cette affection fréquente
+    touche une part importante
+    des femmes après 65 ans.
+  </p>
+
+  <p>
+    Les crampes musculaires,
+    lorsqu’elles persistent,
+    peuvent être un indicateur
+    d’une carence chronique
+    en calcium.
+  </p>
+
+  <p>
+    Le complément de calcium Forever
+    contient des vitamines C et D
+    ainsi que des minéraux
+    tels que le calcium,
+    le magnésium,
+    le zinc et le cuivre,
+    afin de contribuer
+    au maintien d’une ossature saine,
+    d’une fonction musculaire
+    et articulaire normales.
+  </p>
+
+  <p>
+    Il participe également
+    à la formation
+    et à la solidité
+    des os et des dents,
+    à la coagulation sanguine
+    et joue un rôle
+    dans la libération d’hormones.
+  </p>
+
+  <p>
+    Il est important
+    d’assurer un apport suffisant
+    en calcium de manière régulière,
+    notamment en complément
+    lorsque cela est nécessaire.
+  </p>
+
+  <h3>🧴 Composition du produit</h3>
+
+  <p><strong>Contenance :</strong> 90 comprimés</p>
+
+  <p>
+    Calcium, magnésium,
+    vitamine C, zinc,
+    manganèse, cuivre,
+    vitamine D.
+  </p>
+
+  <h3>🧴 Conseils d’utilisation</h3>
+
+  <p>4 comprimés par jour.</p>
+
+  <h3>📋 Ingrédients</h3>
+
+  <p>
+    Bisglycinate de calcium
+    (agent de charge : maltodextrine,
+    antiagglomérant : silice),
+    citrate de calcium,
+    carbonate de calcium
+    (agents de charge : gomme d’acacia,
+    maltodextrine),
+    oxyde de magnésium,
+    agent d’enrobage :
+    cellulose microcristalline,
+    antiagglomérant :
+    carboxyméthyl cellulose,
+    ascorbate de calcium (vitamine C),
+    bisglycinate de magnésium
+    (acidifiant : acide citrique),
+    antiagglomérant : acides gras,
+    bisglycinate de zinc
+    (maltodextrine,
+    carboxyméthylcellulose sodique,
+    carbonate de sodium),
+    agents de charge :
+    carboxyméthylcellulose de sodium réticulée,
+    dextrine,
+    bisglycinate de manganèse
+    (agent de charge : maltodextrine,
+    antiagglomérant : silice,
+    acidifiant : acide citrique),
+    bisglycinate de cuivre
+    (agent de charge : maltodextrine,
+    antiagglomérant : silice,
+    acidifiant : acide citrique),
+    arôme vanille,
+    stabilisant : dextrose,
+    émulsifiant : triglycérides à chaîne moyenne,
+    cholécalciférol (vitamine D),
+    acidifiant : citrate trisodique.
+  </p>
+
+  <p>
+    Cette liste d’ingrédients
+    peut faire l’objet de modifications.
+    Veuillez consulter
+    l’emballage du produit acheté.
+  </p>
+
+  <h3>💪 Bienfaits du complément de calcium</h3>
+
+  <ul>
+    <li>
+      Apporte du calcium,
+      des vitamines C et D,
+      du manganèse,
+      du zinc et du cuivre.
+    </li>
+    <li>
+      Contribue au bon fonctionnement
+      des muscles
+      et à la croissance des os.
+    </li>
+    <li>
+      Soutient le fonctionnement
+      nerveux, musculaire
+      et cardiaque.
+    </li>
+    <li>
+      La vitamine D
+      favorise l’absorption du calcium.
+    </li>
+    <li>
+      Contribue à une meilleure
+      synthèse protéique.
+    </li>
+    <li>
+      Participe à la formation du collagène.
+    </li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+</body>
+</html>
