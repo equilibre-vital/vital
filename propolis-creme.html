@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propolis Crème – Soin protecteur de la peau</title>
+
+  <style>
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+    }
+    h1{color:#2e7d32;}
+    h2{margin-top:30px;}
+
+    .badge{
+      background:#e8f5e9;
+      color:#2e7d32;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
+    }
+
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:8px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
+    }
+
+    select,input,textarea{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
+    }
+
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      text-decoration:none;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-secondary{
+      background:#1976d2;
+      font-size:15px;
+    }
+
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
+    }
+
+    .small{
+      font-size:13px;
+      color:#555;
+      line-height:1.6;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="badge">
+    ✅ Produit original Forever<br>
+    🚚 Livraison partout au Maroc – 💵 Paiement à la livraison
+  </div>
+
+  <h1>Propolis Crème</h1>
+  <p><strong>Crème nourrissante et protectrice à base de propolis et d’extraits naturels.</strong></p>
+
+  <img src="https://i.postimg.cc/y690592j/Screenshot-20260222-150147-Google.jpg"
+       alt="Propolis Crème Forever"
+       class="product-img">
+
+  <h2>Pourquoi choisir Propolis Crème ?</h2>
+  <ul>
+    <li>✔️ Apaise et protège la peau</li>
+    <li>✔️ Aide à maintenir l’hydratation</li>
+    <li>✔️ Contribue au confort cutané quotidien</li>
+    <li>✔️ Convient à un usage familial</li>
+  </ul>
+
+  <p class="small">
+    Formule enrichie en <strong>propolis</strong>, reconnue pour ses propriétés protectrices,
+    associée à des extraits naturels pour nourrir et apaiser la peau.
+  </p>
+
+  <div class="price">
+    Prix unitaire : 322 DH
+  </div>
+
+  <h2>Commande</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 tube</option>
+    <option value="2">2 tubes</option>
+    <option value="3">3 tubes</option>
+    <option value="4">4 tubes</option>
+    <option value="5">5 tubes</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">322</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="index.html">
+    Voir tous nos produits
+  </a>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<script>
+const unitPrice = 322;
+let cartQty = 0;
+
+function updateTotal(){
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  const total = cartQty * unitPrice;
+
+  document.getElementById("cart").innerHTML =
+    "<strong>Propolis Crème</strong><br>" +
+    "Quantité : " + cartQty + " tube(s)<br>" +
+    "Total : " + total + " DH";
+}
+
+function sendWhatsApp(){
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const total = cartQty * unitPrice;
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Propolis Crème%0A" +
+    "Quantité : " + cartQty + " tube(s)%0A" +
+    "Total : " + total + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+</script>
+<hr>
+
+<section id="aloe-propolis-creme-forever" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🌿 ALOE PROPOLIS CRÈME – FOREVER LIVING</h2>
+  <h3>Découvrez les bienfaits de la crème Aloe Vera Propolis de Forever Living : votre peau vous remerciera</h3>
+
+  <p>
+    <strong>Aloe Propolis Crème (Aloe Vera with Propolis Cream)</strong> est une association unique
+    d’aloe vera et de propolis, reconnue pour ses <strong>propriétés antibactériennes,
+    immunostimulantes et cicatrisantes</strong>.
+    Enrichie en <strong>vitamine E antioxydante</strong> et en extraits de plantes,
+    cette crème apporte un soin complet à la peau.
+  </p>
+
+  <p>
+    La <strong>camomille</strong>, connue pour ses vertus calmantes, apaisantes et anti-inflammatoires,
+    ainsi que l’<strong>allantoïne</strong>, contribuent à réparer et protéger la peau.
+    Les <strong>vitamines A et E</strong> apportent douceur, souplesse et confort cutané.
+  </p>
+
+  <p>
+    Grâce à sa texture riche et onctueuse, la crème Aloe Propolis agit comme un véritable
+    <strong>soin antibactérien réparateur</strong> qui apaise et soulage les petites irritations
+    cutanées du quotidien.
+  </p>
+
+  <p>
+    Elle peut être utilisée sur les <strong>peaux sèches, rugueuses ou sensibilisées</strong>,
+    et convient parfaitement pour adoucir la peau, y compris les zones délicates
+    comme les fesses de bébé.
+  </p>
+
+  <p>
+    L’aloe propolis favorise également les soins en cas de <strong>peau écorchée,
+    crevassée ou douloureuse</strong>, notamment les crevasses aux talons en période hivernale.
+    Elle peut aussi être utilisée sur des problématiques cutanées plus importantes
+    telles que le <strong>psoriasis, l’acné juvénile et l’eczéma</strong>.
+  </p>
+
+  <h3>🧬 Composition du produit</h3>
+
+  <p><strong>Contenance :</strong> 113 g</p>
+
+  <ul>
+    <li><strong>74,1 % de gel d’aloès</strong></li>
+    <li><strong>0,5 % de propolis</strong></li>
+    <li>Camomille</li>
+    <li>Allantoïne</li>
+    <li>Vitamines A et E</li>
+  </ul>
+
+  <h3>📌 Conseils d’utilisation</h3>
+
+  <p>
+    Appliquer généreusement la <strong>crème Aloe Propolis</strong> sur une peau
+    parfaitement propre et sèche.
+  </p>
+
+  <p>
+    Pour les zones de peau à problèmes
+    (<strong>eczéma, acné, psoriasis, herpès</strong>, etc.),
+    la crème peut être appliquée <strong>autant de fois que nécessaire</strong>.
+  </p>
+
+  <p>
+    Pour une efficacité renforcée, il est possible d’associer l’Aloe Propolis Crème
+    à une application préalable de <strong>l’Aloe Vera Gel</strong>.
+  </p>
+
+  <p>
+    Il est également recommandé de prendre soin de la peau du visage
+    en suivant les <strong>conseils du pharmacien</strong>.
+  </p>
+
+  <h3>💚 Bienfaits de l’Aloe Propolis Crème Forever</h3>
+
+  <ul>
+    <li>Hydrate efficacement la peau (mains ou pieds secs)</li>
+    <li>Aide à réduire les boutons sur le visage (acné)</li>
+    <li>Soulage l’érythème fessier chez le bébé</li>
+    <li>Aide à cicatriser les gerçures des lèvres et des pieds</li>
+    <li>Accompagne les soins en cas d’eczéma et de psoriasis</li>
+    <li>Agit comme antiseptique pour les petits maux du quotidien</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+</body>
+</html>
