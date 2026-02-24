@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bee Honey – Miel naturel & vitalité</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+    }
+    h1 { color: #2e7d32; }
+    h2 { margin-top: 30px; }
+
+    .badge {
+      background: #fff8e1;
+      color: #8d6e63;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 6px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 15px 0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 15px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #1976d2;
+      font-size: 15px;
+    }
+
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="badge">
+    🍯 Produit naturel – Miel de qualité<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Bee Honey</h1>
+  <p><strong>Miel naturel pour soutenir l’énergie et le bien-être au quotidien.</strong></p>
+
+  <img src="https://i.postimg.cc/PqT8BRsM/Screenshot-20260222-153619-Google.jpg"
+       class="product-img"
+       alt="Bee Honey">
+
+  <h2>Pourquoi choisir Bee Honey ?</h2>
+  <ul>
+    <li>✔️ Source naturelle d’énergie</li>
+    <li>✔️ Contribue au bien-être général</li>
+    <li>✔️ Goût agréable et facile à consommer</li>
+    <li>✔️ Idéal pour accompagner une alimentation équilibrée</li>
+  </ul>
+
+  <p>
+    🍯 <strong>Bee Honey</strong> est un miel naturel sélectionné pour sa qualité,
+    idéal pour soutenir la vitalité au quotidien et apporter un complément énergétique naturel.
+  </p>
+
+  <div class="price">
+    Prix unitaire : 274 DH
+  </div>
+
+  <h2>Conseils d’utilisation</h2>
+  <p>
+    Prendre <strong>1 à 2 cuillères par jour</strong>, seul ou mélangé à une boisson tiède
+    ou à un aliment, selon les préférences.
+  </p>
+
+  <p>
+    <small>
+      Produit naturel – à intégrer dans une alimentation équilibrée.
+    </small>
+  </p>
+
+  <h2>Commande</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 pot</option>
+    <option value="2">2 pots</option>
+    <option value="3">3 pots</option>
+    <option value="4">4 pots</option>
+    <option value="5">5 pots</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">274</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="https://equilibrevitale.github.io/">
+    Voir tous nos autres produits
+  </a>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<script>
+const unitPrice = 274;
+let cartQty = 0;
+
+function updateTotal() {
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart() {
+  cartQty = document.getElementById("qty").value;
+  const total = cartQty * unitPrice;
+
+  document.getElementById("cart").innerHTML =
+    "<strong>Bee Honey</strong><br>" +
+    "Quantité : " + cartQty + " pot(s)<br>" +
+    "Total : " + total + " DH";
+}
+
+function sendWhatsApp() {
+  if (cartQty === 0) {
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const total = cartQty * unitPrice;
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Bee Honey%0A" +
+    "Quantité : " + cartQty + " pot(s)%0A" +
+    "Total : " + total + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse de livraison : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+</script>
+<hr>
+
+<section id="miel-forever-living" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🍯 MIEL FOREVER LIVING</h2>
+  <h3>Découvrez les bienfaits du miel Forever Living : un trésor naturel pour votre santé</h3>
+
+  <p>
+    Le <strong>miel Forever Living (Forever Bee Honey)</strong> est un aliment naturellement énergétique.
+    Il est reconnu pour ses <strong>propriétés antibactériennes, anti-inflammatoires et antioxydantes</strong>,
+    et la liste de ses bienfaits est particulièrement riche.
+  </p>
+
+  <p>
+    Le miel Forever est produit en <strong>Espagne depuis 2010</strong>.
+    Les ruches sont implantées sur des hauts plateaux préservés,
+    dans les régions d’<strong>Andalousie, d’Estrémadure, de Castille-La Manche et de Vieille Castille</strong>.
+    Ces zones naturelles sont riches en plantes aromatiques telles que
+    le romarin, la menthe, le thym, la lavande, l’aubépine, le chardon et les bruyères.
+  </p>
+
+  <p>
+    <strong>Forever Bee Honey</strong> est un véritable concentré d’énergie.
+    Il est idéal en cas de fatigue, de baisse de tonus ou même de baisse de moral.
+    Pendant la période hivernale, son action contribue à renforcer
+    les défenses immunitaires de l’organisme.
+    Ses vertus sont également largement reconnues pour soulager les maux de gorge.
+  </p>
+
+  <p>
+    Le miel Forever Living peut être utilisé pour sucrer les aliments
+    ou les boissons. Il est toutefois important de noter
+    qu’au-delà d’une température de <strong>40&nbsp;°C</strong>,
+    le miel perd une partie de ses propriétés naturelles.
+  </p>
+
+  <h3>🌍 Le miel Forever et les trésors de la ruche</h3>
+
+  <p>
+    Les abeilles jouent un rôle essentiel dans la nature et l’environnement
+    en pollinisant les fleurs et en maintenant l’équilibre de notre écosystème.
+    Faites l’expérience du meilleur de la nature
+    grâce aux nutriments issus directement de la ruche.
+  </p>
+
+  <p>
+    Le <strong>Forever Bee Honey</strong> offre un boost naturel,
+    légèrement sucré. Il est récolté <strong>à la main dans les montagnes d’Espagne</strong>,
+    garantissant une qualité optimale tout en respectant
+    le bien-être des abeilles.
+  </p>
+
+  <p>
+    La <strong>propolis</strong> est une substance que les abeilles utilisent
+    pour protéger, renforcer et désinfecter la ruche.
+    Le <strong>Forever Bee Propolis</strong> contient cette substance naturelle.
+    Le pollen d’abeilles est quant à lui riche en
+    <strong>bioflavonoïdes et en antioxydants</strong>.
+    Sans conservateurs ni édulcorants,
+    les produits Forever offrent une expérience authentique,
+    au plus près de la ruche.
+  </p>
+
+  <p>
+    Avec le <strong>Forever Bee Pollen</strong>,
+    vous profitez d’une expérience encore plus proche de la ruche.
+    La reine des abeilles est nourrie exclusivement de <strong>gelée royale</strong>,
+    ce qui expliquerait sa grande taille et sa longévité exceptionnelle.
+    Elle vit jusqu’à <strong>50 fois plus longtemps</strong>
+    que les abeilles ouvrières.
+  </p>
+
+  <p>
+    Grâce au <strong>Forever Royal Jelly</strong>,
+    vous bénéficiez de nutriments dits « royaux » dans un seul pot.
+    Forever propose ainsi <strong>quatre produits naturels exceptionnels</strong>
+    issus de la ruche, dédiés à votre bien-être et à votre santé.
+  </p>
+
+  <h3>🧬 Composition du produit</h3>
+
+  <p>
+    <strong>100 % miel</strong><br>
+    <strong>Poids :</strong> 500 g
+  </p>
+
+  <p>
+    Contient naturellement : fructose, glucose, sels minéraux,
+    vitamines, oligo-éléments, diastases, hormones
+    et substances aromatiques produites dans la ruche par les abeilles.
+  </p>
+
+  <h3>📌 Conseils d’utilisation</h3>
+
+  <p>
+    Le miel Forever Living peut être consommé <strong>tout au long de l’année</strong>
+    afin d’atténuer la fatigue physique ou intellectuelle,
+    et particulièrement en hiver pour aider à protéger l’organisme.
+  </p>
+
+  <p>
+    Il peut être utilisé pour sucrer les boissons,
+    en veillant à éviter les liquides trop chauds,
+    car le miel perd ses propriétés naturelles à haute température.
+  </p>
+
+  <h3>💚 Bienfaits du miel Forever Living</h3>
+
+  <ul>
+    <li>Peut remplacer le sucre avec une excellente qualité nutritionnelle</li>
+    <li>Contribue à réduire la fatigue physique et intellectuelle</li>
+    <li>Aide à combattre la fièvre</li>
+    <li>Soulage les maux de gorge</li>
+    <li>Agit comme antioxydant pour l’organisme</li>
+    <li>Contribue à améliorer la mémoire</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+</body>
+</html>
