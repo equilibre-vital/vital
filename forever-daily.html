@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever Daily – Vitamines & immunité</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+    }
+    h1 { color: #2e7d32; }
+    h2 { margin-top: 30px; }
+
+    .badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 6px;
+    }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 15px 0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 15px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #1976d2;
+      font-size: 15px;
+    }
+
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="badge">
+    💊 Multivitamines quotidiennes<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Forever Daily</h1>
+  <p><strong>Complément multivitaminé pour soutenir l’énergie et l’immunité au quotidien.</strong></p>
+
+  <img src="https://i.postimg.cc/CxwXPbLH/Screenshot-20260222-170626-Chrome.jpg"
+       class="product-img"
+       alt="Forever Daily">
+
+  <h2>Pourquoi choisir Forever Daily ?</h2>
+  <ul>
+    <li>✔️ Apporte vitamines et minéraux essentiels</li>
+    <li>✔️ Soutient l’énergie au quotidien</li>
+    <li>✔️ Contribue au bon fonctionnement du système immunitaire</li>
+    <li>✔️ Adapté à une utilisation quotidienne</li>
+  </ul>
+
+  <p>
+    <strong>Forever Daily</strong> est conçu pour accompagner une alimentation équilibrée
+    et aider à couvrir les besoins nutritionnels essentiels de l’organisme.
+  </p>
+
+  <div class="price">
+    Prix unitaire : 275 DH
+  </div>
+
+  <h2>Conseils d’utilisation</h2>
+  <p>
+    Prendre <strong>1 comprimé par jour</strong>, de préférence au cours d’un repas.
+  </p>
+
+  <p>
+    <small>
+      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
+      Ne pas dépasser la dose journalière recommandée.
+    </small>
+  </p>
+
+  <h2>Commande</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">275</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="https://equilibrevitale.github.io/">
+    Voir tous nos autres produits
+  </a>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<script>
+const unitPrice = 275;
+let cartQty = 0;
+
+function updateTotal() {
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart() {
+  cartQty = document.getElementById("qty").value;
+  const total = cartQty * unitPrice;
+
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Daily</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + total + " DH";
+}
+
+function sendWhatsApp() {
+  if (cartQty === 0) {
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+  const total = cartQty * unitPrice;
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Forever Daily%0A" +
+    "Quantité : " + cartQty + " boîte(s)%0A" +
+    "Total : " + total + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse de livraison : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+</script>
+<hr>
+
+<section id="description-complete-daily" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🟢 MULTI-VITAMINES DAILY – FOREVER</h2>
+
+  <h3>🔬 Formule exclusive à base de 55 vitamines et minéraux</h3>
+
+  <p>
+    Le corps humain est constitué de milliards de cellules, chacune ayant besoin de nutriments essentiels pour fonctionner correctement.
+    Une alimentation équilibrée est indispensable, mais elle ne suffit pas toujours à couvrir l’ensemble des besoins nutritionnels quotidiens.
+  </p>
+
+  <p>
+    <strong>Forever Multi-Vitamines Daily</strong>, associé à une alimentation saine, contribue à fournir aux cellules de l’organisme
+    les nutriments indispensables à leur bon fonctionnement. Toutefois, certains micronutriments sont parfois mal assimilés par l’organisme.
+    C’est pourquoi ils doivent être apportés sous des formes spécifiques afin d’optimiser leur absorption et leur efficacité.
+  </p>
+
+  <p>
+    En nourrissant les cellules avec des nutriments essentiels soigneusement sélectionnés, cette formule favorise la production d’énergie,
+    la santé cellulaire, la vitalité générale et le bien-être au quotidien.
+  </p>
+
+  <p>
+    Cette approche globale contribue à améliorer l’état général de l’organisme et à soutenir ses fonctions vitales jour après jour.
+  </p>
+
+  <h3>🌿 Une formule unique et complète</h3>
+
+  <p>
+    <strong>Multi-Vitamines Daily Forever</strong> est une formule exclusive composée de <strong>55 ingrédients</strong> associant vitamines,
+    minéraux biodisponibles, phytonutriments issus d’extraits de fruits et de légumes, ainsi que le <strong>complexe AOS™</strong>,
+    reconnu pour optimiser l’assimilation des nutriments par les cellules.
+  </p>
+
+  <p>
+    L’action du Complexe AOS™ permet une absorption optimale des nutriments au niveau cellulaire,
+    aidant ainsi l’organisme à lutter contre la fatigue chronique du quotidien et à maintenir un niveau d’énergie stable.
+  </p>
+
+  <p>
+    La formule Forever Daily est unique et conçue pour offrir un bien-être optimal au quotidien,
+    tout en soutenant durablement la santé globale.
+  </p>
+
+  <h3>🧪 Composition du produit</h3>
+
+  <p><strong>Contenance :</strong> 60 comprimés</p>
+
+  <h4>🔹 Mélange AOS Complex™</h4>
+  <p>
+    Bisglycinate de calcium, bisglycinate de magnésium, stabilisants (cellulose microcristalline, dioxyde de silicium),
+    extraits d’orange amère (Citrus aurantium) titrés en bioflavonoïdes et hespéridine,
+    extrait de fleur de rose d’Inde (Tagetes erecta) titré en lutéine et zéaxanthines,
+    lycopène, coenzyme Q10, poudre de jus d’Aloe vera (Aloe barbadensis).
+  </p>
+
+  <h4>🔹 Mélange Forever FVX20</h4>
+  <p>
+    Pomme, betterave, poivre rouge, tomate, fraise, canneberge, acérola, épinard, chou,
+    oignon, mangoustan, açaï, mûre, grenade, myrtille, brocoli, chou kale, carotte,
+    citrouille, raisin.
+  </p>
+
+  <h4>🔹 Vitamines et minéraux</h4>
+  <p>
+    Vitamines A, C, D, E, B1, B2, B3, B5, B6, B8, B9, B12,
+    fer, zinc, cuivre, manganèse, chrome, iode, sélénium, molybdène.
+  </p>
+
+  <p style="font-size:13px; color:#555;">
+    ⚠️ Cette liste d’ingrédients peut faire l’objet de modifications.
+    Veuillez consulter l’emballage du produit acheté.
+  </p>
+
+  <h3>📌 Conseils d’utilisation</h3>
+  <p>
+    Prendre <strong>2 comprimés de Forever Daily chaque matin</strong>, de préférence au cours d’un repas.
+  </p>
+
+  <h3>💚 Bienfaits des Multi-Vitamines Daily</h3>
+  <ul>
+    <li>Apport quotidien complet en vitamines et minéraux essentiels</li>
+    <li>Contribue à préserver le capital santé</li>
+    <li>Aide l’organisme à lutter contre les radicaux libres</li>
+    <li>Comble les déficits en calcium, acide folique et vitamine B12</li>
+    <li>Favorise l’énergie, la vitalité et le bien-être général</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+</body>
+</html>
