@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moisturizer – Hydratation & douceur | Équilibre Vitale</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f9fb;
+      color: #222;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #ffffff;
+      padding: 20px;
+    }
+    h1 { color: #2e7d32; }
+    h2 { margin-top: 30px; }
+
+    .badge {
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .product-img {
+      width: 100%;
+      max-width: 320px;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+
+    ul { margin-left: 20px; }
+
+    .price {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d32f2f;
+      margin: 15px 0;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin: 6px 0 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      background: #25d366;
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 15px 0;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #1976d2;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      margin-top: 30px;
+    }
+
+    .important {
+      background: #fff6f6;
+      border-left: 4px solid #d32f2f;
+      padding: 15px;
+      margin-top: 25px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🌍 Bouton traduction -->
+<div style="position:fixed;top:15px;right:15px;z-index:3000;">
+  <button onclick="translateToArabic()" style="
+    padding:6px 10px;
+    border:none;
+    border-radius:6px;
+    background:#2e7d32;
+    color:white;
+    font-size:14px;
+    cursor:pointer;">
+    🌍 العربية
+  </button>
+</div>
+
+<div class="container">
+
+  <div class="badge">
+    ✅ Produit original Forever<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Moisturizer</h1>
+  <p><strong>Crème hydratante pour nourrir la peau en profondeur et préserver sa douceur.</strong></p>
+
+  <img src="https://i.postimg.cc/hGmxs0KS/Screenshot-20260221-193123-Google.jpg"
+       alt="Moisturizer Forever"
+       class="product-img">
+
+  <h2>Pourquoi choisir Moisturizer ?</h2>
+  <ul>
+    <li>✔️ Hydrate intensément la peau</li>
+    <li>✔️ Aide à maintenir la douceur et l’élasticité</li>
+    <li>✔️ Texture agréable, non grasse</li>
+    <li>✔️ Convient à un usage quotidien</li>
+  </ul>
+
+  <p>
+    Moisturizer aide à protéger la peau contre la sécheresse,
+    tout en lui apportant confort et souplesse au quotidien.
+  </p>
+
+  <div class="price">
+    Prix unitaire : 339 DH
+  </div>
+
+  <h2>Conseils d’utilisation</h2>
+  <p>
+    Appliquer sur une peau propre et sèche.<br>
+    <strong>Utiliser matin et/ou soir</strong> en massant délicatement.
+  </p>
+
+  <h2>Commander</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="tel" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
+    🔙 Voir tous nos autres produits
+  </a>
+
+  <div class="important">
+    <strong>⚠️ Information importante</strong><br><br>
+    Ce produit s’inscrit dans une <strong>démarche de soin et de bien-être</strong>.
+    Il ne remplace pas un avis dermatologique en cas de problème cutané.
+  </div>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<!-- Google Translate -->
+<div id="google_translate_element" style="display:none;"></div>
+
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    { pageLanguage: 'fr', includedLanguages: 'fr,ar' },
+    'google_translate_element'
+  );
+}
+
+function translateToArabic(){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){
+    select.value = "ar";
+    select.dispatchEvent(new Event("change"));
+  }
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+function sendWhatsApp(){
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+
+  const message =
+    "Commande : Moisturizer%0A" +
+    "Prix : 339 DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+</script>
+<hr>
+
+<section id="forever-aloe-moisturizing-lotion" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🌿 FOREVER ALOE MOISTURIZING LOTION</h2>
+
+  <h3>Qu’est-ce que c’est ?</h3>
+
+  <p>
+    <strong>Forever Aloe Moisturizing Lotion</strong>
+    est une lotion hydratante multi-usage
+    formulée par Forever Living Products
+    à base d’aloe vera stabilisé,
+    de collagène et d’élastine.
+  </p>
+
+  <p>
+    Elle est conçue pour hydrater,
+    nourrir, apaiser et protéger
+    la peau du visage, des mains
+    et du corps.
+  </p>
+
+  <p>
+    Elle se présente sous forme
+    d’une émulsion riche et veloutée,
+    adaptée à tous les types de peau,
+    y compris les peaux sèches
+    et sensibles.
+  </p>
+
+  <h3>🧴 Composition – Ingrédients principaux</h3>
+
+  <p>Voici les principaux ingrédients actifs et leurs bienfaits pour la peau :</p>
+
+  <ul>
+    <li>
+      <strong>Aloe Barbadensis Leaf Juice (gel d’aloe vera)</strong> :
+      hydratant naturel et apaisant,
+      aide à retenir l’eau dans la peau.
+    </li>
+    <li>
+      <strong>Prunus Armeniaca Kernel Oil (huile de noyau d’abricot)</strong> :
+      riche en acides gras essentiels,
+      nourrit et assouplit la peau.
+    </li>
+    <li>
+      <strong>Simmondsia Chinensis (huile de jojoba)</strong> :
+      protège et adoucit la peau,
+      aide à réguler le sébum.
+    </li>
+    <li>
+      <strong>Collagène & élastine</strong> :
+      protéines contribuant
+      au maintien de l’élasticité
+      et de la fermeté cutanée.
+    </li>
+    <li>
+      <strong>Sodium Hyaluronate (acide hyaluronique)</strong> :
+      puissant humectant
+      qui attire et retient l’hydratation.
+    </li>
+    <li>
+      <strong>Vitamines C et E</strong> :
+      antioxydants aidant à protéger
+      la peau contre les agressions extérieures.
+    </li>
+    <li>
+      <strong>Allantoïne & extraits de camomille</strong> :
+      apportent un effet apaisant
+      et favorisent la régénération cellulaire.
+    </li>
+  </ul>
+
+  <p>
+    D’autres composants
+    servent d’émollients,
+    de stabilisants
+    ou de conservateurs
+    afin d’assurer la stabilité
+    et la texture optimale de la formule.
+  </p>
+
+  <h3>💧 Bienfaits principaux</h3>
+
+  <ul>
+    <li>
+      <strong>Hydratation intense</strong> :
+      aide à retenir l’eau
+      dans les couches de la peau
+      et à limiter la sécheresse cutanée.
+    </li>
+    <li>
+      <strong>Peau plus douce et souple</strong> :
+      les huiles naturelles,
+      le collagène et l’élastine
+      améliorent la texture de la peau.
+    </li>
+    <li>
+      <strong>Peau apaisée et restaurée</strong> :
+      l’aloe vera,
+      l’allantoïne
+      et les extraits végétaux
+      calment les irritations
+      et aident à restaurer
+      la barrière cutanée,
+      notamment après le vent,
+      le froid ou le soleil.
+    </li>
+    <li>
+      <strong>Protection légère</strong> :
+      contribue à protéger la peau
+      contre certaines agressions
+      environnementales
+      (pollution, climat sec, vent).
+    </li>
+    <li>
+      <strong>Convient à tout le corps</strong> :
+      utilisable sur le visage,
+      les mains et le corps,
+      pour un soin polyvalent.
+    </li>
+  </ul>
+
+  <h3>🧴 Conseils d’utilisation</h3>
+
+  <ul>
+    <li>Appliquer sur une peau propre (visage, mains ou corps).</li>
+    <li>Masser doucement jusqu’à absorption complète.</li>
+    <li>
+      En tant que base de maquillage,
+      appliquer une très fine couche
+      avant le fond de teint.
+    </li>
+    <li>
+      Utiliser matin et soir,
+      ou plus fréquemment
+      si la peau est sèche
+      ou tiraillée.
+    </li>
+    <li>
+      Pour une première utilisation,
+      il est recommandé
+      d’effectuer un test
+      de tolérance cutanée
+      sur une petite zone.
+    </li>
+  </ul>
+
+  <h3>📌 Points à retenir</h3>
+
+  <ul>
+    <li>Lotion hydratante et apaisante à base d’aloe vera stabilisé.</li>
+    <li>Convient au visage et au corps, même aux peaux sensibles.</li>
+    <li>Riche en collagène, élastine, huiles naturelles et vitamines.</li>
+    <li>Peut être utilisée comme base avant maquillage.</li>
+    <li>
+      Ne remplace pas un traitement médical
+      en cas de problème dermatologique important.
+    </li>
+  </ul>
+
+</section>
+</body>
+</html>
