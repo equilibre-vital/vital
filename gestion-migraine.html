@@ -137,10 +137,38 @@
       margin-top: 20px;
       line-height: 1.6;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Bouton traduction -->
+<div id="translate-box">
+  🌍
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
 <h1>Protocole d’accompagnement – Gestion de la migraine</h1>
@@ -167,32 +195,25 @@
 <div class="benefits">
 
   <p><strong>🔹 Gel d’Aloe Vera</strong><br>
-  Le Gel d’Aloe Vera contribue à l’hydratation interne
-  et au confort digestif.
-  Il accompagne les fonctions naturelles de l’organisme
-  et participe à l’équilibre général,
-  souvent recherché dans les périodes de fatigue ou de tensions.</p>
+  Contribue à l’hydratation interne
+  et au confort digestif,
+  soutenant l’équilibre général de l’organisme.</p>
 
   <p><strong>🔹 Forever Therm</strong><br>
-  Forever Therm est formulé pour soutenir le métabolisme
-  et accompagner la production d’énergie.
-  Il est utilisé dans les démarches visant à mieux gérer
-  la vitalité et le tonus au quotidien,
-  notamment en période de surcharge physique ou mentale.</p>
+  Accompagne le métabolisme
+  et la gestion de l’énergie,
+  utile en période de fatigue physique ou mentale.</p>
 
   <p><strong>🔹 Thermogen</strong><br>
-  Thermogen est un produit chauffant et stimulant,
-  apprécié pour son action locale et son effet dynamisant.
-  Il s’intègre dans une approche globale de bien-être
-  visant à soutenir la détente et la gestion des tensions.</p>
+  Produit stimulant et chauffant,
+  intégré dans une approche globale
+  de détente et de bien-être.</p>
 
 </div>
 
 <h2>Mode d’utilisation</h2>
 <p>
-  👉 <strong>Le mode d’utilisation détaillé est communiqué au moment de la livraison</strong>,
-  afin de proposer un accompagnement personnalisé
-  et adapté à chaque situation.
+  👉 <strong>Le mode d’utilisation détaillé est communiqué au moment de la livraison</strong>.
 </p>
 
 <h2>Prix du protocole</h2>
@@ -210,17 +231,11 @@
 
 <div class="important">
   <strong>⚠️ Information importante</strong><br><br>
-  Ce protocole est une <strong>approche d’accompagnement naturel</strong>.
-  Il ne constitue pas un traitement médical
-  et ne remplace ni un avis médical
-  ni un traitement prescrit.<br><br>
-
-  En cas de migraines fréquentes, intenses ou persistantes,
-  il est recommandé de consulter un professionnel de santé.
+  Ce protocole est une approche d’accompagnement naturel
+  et ne remplace pas un avis médical.
 </div>
 
 <h2>Commander le protocole</h2>
-<p><strong>🚚 Livraison gratuite partout au Maroc – sous 48h</strong></p>
 
 <input type="text" id="name" placeholder="Nom et prénom">
 <input type="tel" id="phone" placeholder="Téléphone">
@@ -238,29 +253,38 @@
 
 <script>
 function sendWhatsApp() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Protocole Gestion de la migraine%0A" +
-    "Total : 1155 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
-
+    "Bonjour,%0A%0ACommande : Protocole Gestion de la migraine%0ATotal : 1155 DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
 function sendAccompagnement() {
   const message =
-    "Bonjour,%0A%0A" +
-    "Je souhaite un accompagnement personnalisé pour le protocole Gestion de la migraine.";
-
+    "Bonjour,%0A%0AJe souhaite un accompagnement personnalisé pour le protocole Gestion de la migraine.";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
