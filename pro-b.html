@@ -22,6 +22,7 @@
 
     h1 { color: #2e7d32; }
     h2 { margin-top: 30px; }
+    h3 { margin-top: 25px; color:#2e7d32; }
 
     .badge {
       background: #e3f2fd;
@@ -70,11 +71,6 @@
       cursor: pointer;
     }
 
-    .btn-gray {
-      background:#455a64;
-      font-size:15px;
-    }
-
     .cart {
       background: #f1f1f1;
       padding: 15px;
@@ -98,104 +94,114 @@
       margin-top: 30px;
     }
 
-    /* ===== GOOGLE TRANSLATE ===== */
-    .translate-box {
+    /* Google translate button */
+    #translate-box {
       position: fixed;
-      top: 15px;
-      right: 15px;
-      z-index: 3000;
-    }
-
-    #google_translate_element select {
+      top: 12px;
+      right: 12px;
       background: #2e7d32;
       color: #fff;
-      border: none;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 20px;
       font-size: 13px;
+      z-index: 9999;
+    }
+
+    #translate-box a {
+      color: #fff;
+      text-decoration: none;
       font-weight: bold;
-      cursor: pointer;
-    }
-
-    .goog-logo-link,
-    .goog-te-gadget span {
-      display: none !important;
-    }
-
-    .goog-te-gadget {
-      color: transparent !important;
+      margin: 0 4px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- GOOGLE TRANSLATE BUTTON -->
-<div class="translate-box">
-  <div id="google_translate_element"></div>
+<!-- Google Translate -->
+<div id="translate-box">
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> | 
+  <a href="#" onclick="setLang('en')">English</a>
 </div>
+<div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
 
-<div class="badge">
-  🦠 Probiotiques – Confort digestif<br>
-  🚚 Livraison partout au Maroc – Paiement à la livraison
-</div>
+  <div class="badge">
+    🦠 Probiotiques – Confort digestif<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
 
-<h1>Pro-B</h1>
-<p><strong>Complément alimentaire à base de probiotiques pour soutenir l’équilibre de la flore intestinale.</strong></p>
+  <h1>Pro-B</h1>
+  <p><strong>Complément alimentaire à base de probiotiques pour soutenir l’équilibre de la flore intestinale.</strong></p>
 
-<img src="https://i.postimg.cc/VkGnmSh6/Screenshot-20260219-152032-Google.jpg" class="product-img" alt="Pro-B">
+  <img src="https://i.postimg.cc/VkGnmSh6/Screenshot-20260219-152032-Google.jpg" class="product-img" alt="Pro-B">
 
-<h2>Pourquoi choisir Pro-B ?</h2>
-<ul>
-  <li>✔️ Équilibre de la flore intestinale</li>
-  <li>✔️ Confort digestif</li>
-  <li>✔️ Soutien du microbiote</li>
-  <li>✔️ Renforce les défenses naturelles</li>
-</ul>
+  <h2>Pourquoi choisir Pro-B ?</h2>
+  <ul>
+    <li>✔️ Équilibre de la flore intestinale</li>
+    <li>✔️ Confort digestif</li>
+    <li>✔️ Soutien du microbiote</li>
+    <li>✔️ Renforce les défenses naturelles</li>
+  </ul>
 
-<div class="price">Prix unitaire : 483 DH</div>
+  <div class="price">Prix unitaire : 483 DH</div>
 
-<h2>Commander</h2>
+  <h2>Commander</h2>
 
-<label>Quantité</label>
-<select id="qty" onchange="updateTotal()">
-  <option value="1">1 boîte</option>
-  <option value="2">2 boîtes</option>
-  <option value="3">3 boîtes</option>
-  <option value="4">4 boîtes</option>
-</select>
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+  </select>
 
-<div class="price">
-  Total : <span id="total">483</span> DH
-</div>
+  <div class="price">
+    Total : <span id="total">483</span> DH
+  </div>
 
-<button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-<div class="cart" id="cart">
-  Aucun produit ajouté.
-</div>
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
 
-<h2>Informations de livraison</h2>
+  <h2>Informations de livraison</h2>
 
-<input type="text" id="name" placeholder="Nom et prénom">
-<input type="tel" id="phone" placeholder="Téléphone">
-<textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="tel" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
-<button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-<a class="btn btn-gray" href="index.html">🔙 Retour aux produits</a>
+  <div class="important">
+    Pro-B est un complément alimentaire.
+    Il ne remplace ni un traitement médical
+    ni l’avis d’un professionnel de santé.
+  </div>
 
-<div class="important">
-  Pro-B est un complément alimentaire.
-  Il ne remplace ni un traitement médical
-  ni l’avis d’un professionnel de santé.
-</div>
+  <!-- ===== COMPLÉMENTS D’INFORMATION (AJOUTÉS À LA FIN) ===== -->
 
-<footer>
-  © Équilibre Vital – Tous droits réservés
-</footer>
+  <h3>📌 Conseils d’utilisation</h3>
+  <p>
+    Prendre <strong>1 gélule par jour</strong>,
+    environ <strong>30 minutes avant le repas</strong>,
+    avec un grand verre d’eau.
+  </p>
+
+  <h3>💚 Bienfaits d’Active Pro-B</h3>
+  <ul>
+    <li>Alliance unique de probiotiques et de prébiotiques</li>
+    <li>Contribue à une flore intestinale équilibrée et saine</li>
+    <li>Améliore l’assimilation des nutriments</li>
+    <li>Renforce les défenses immunitaires de l’organisme</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+  <footer>
+    © Équilibre Vital – Tous droits réservés
+  </footer>
 
 </div>
 
@@ -211,11 +217,9 @@ function updateTotal() {
 function addToCart() {
   cartQty = document.getElementById("qty").value;
   const total = cartQty * unitPrice;
-
   document.getElementById("cart").innerHTML =
-    "<strong>Pro-B</strong><br>" +
-    "Quantité : " + cartQty + " boîte(s)<br>" +
-    "Total : " + total + " DH";
+    "<strong>Pro-B</strong><br>Quantité : " + cartQty +
+    " boîte(s)<br>Total : " + total + " DH";
 }
 
 function sendWhatsApp() {
@@ -223,38 +227,38 @@ function sendWhatsApp() {
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
-
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const address = document.getElementById("address").value;
   const total = cartQty * unitPrice;
 
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Pro-B%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + total + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+    "Bonjour,%0A%0ACommande : Pro-B%0AQuantité : " + cartQty +
+    " boîte(s)%0ATotal : " + total +
+    " DH%0A%0ANom : " + name +
+    "%0ATéléphone : " + phone +
+    "%0AAdresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
-</script>
 
-<!-- GOOGLE TRANSLATE SCRIPT -->
-<script>
+/* Google translate */
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
-    {
-      pageLanguage: 'fr',
-      includedLanguages: 'ar,en',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    },
+    {pageLanguage: 'fr', autoDisplay: false},
     'google_translate_element'
   );
 }
+
+function setLang(lang) {
+  const select = document.querySelector("select.goog-te-combo");
+  if (select) {
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 </script>
+
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
