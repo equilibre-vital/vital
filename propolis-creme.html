@@ -93,10 +93,37 @@
       color:#777;
       margin-top:30px;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Bouton traduction -->
+<div id="translate-box">
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
   <div class="badge">
@@ -124,9 +151,7 @@
     associée à des extraits naturels pour nourrir et apaiser la peau.
   </p>
 
-  <div class="price">
-    Prix unitaire : 322 DH
-  </div>
+  <div class="price">Prix unitaire : 322 DH</div>
 
   <h2>Commande</h2>
 
@@ -139,15 +164,11 @@
     <option value="5">5 tubes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">322</span> DH
-  </div>
+  <div class="price">Total : <span id="total">322</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
@@ -157,13 +178,9 @@
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos produits</a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
 
@@ -178,12 +195,10 @@ function updateTotal(){
 
 function addToCart(){
   cartQty = document.getElementById("qty").value;
-  const total = cartQty * unitPrice;
-
   document.getElementById("cart").innerHTML =
     "<strong>Propolis Crème</strong><br>" +
     "Quantité : " + cartQty + " tube(s)<br>" +
-    "Total : " + total + " DH";
+    "Total : " + (cartQty * unitPrice) + " DH";
 }
 
 function sendWhatsApp(){
@@ -191,24 +206,32 @@ function sendWhatsApp(){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
-
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const total = cartQty * unitPrice;
-
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Propolis Crème%0A" +
-    "Quantité : " + cartQty + " tube(s)%0A" +
-    "Total : " + total + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
-
+    "Bonjour,%0A%0ACommande : Propolis Crème%0AQuantité : " +
+    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    {pageLanguage:'fr', autoDisplay:false},
+    'google_translate_element'
+  );
+}
+function setLang(lang){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 <hr>
 
 <section id="aloe-propolis-creme-forever" style="padding:20px; line-height:1.7; font-size:15px;">
