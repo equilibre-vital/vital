@@ -12,12 +12,14 @@
       background: #f7f9fb;
       color: #222;
     }
+
     .container {
       max-width: 720px;
       margin: auto;
       background: #ffffff;
       padding: 20px;
     }
+
     h1 { color: #2e7d32; }
     h2 { margin-top: 30px; }
 
@@ -68,8 +70,10 @@
       cursor: pointer;
     }
 
-    .btn-blue { background:#1976d2; font-size:15px; }
-    .btn-gray { background:#455a64; font-size:15px; }
+    .btn-gray {
+      background:#455a64;
+      font-size:15px;
+    }
 
     .cart {
       background: #f1f1f1;
@@ -93,10 +97,44 @@
       color: #777;
       margin-top: 30px;
     }
+
+    /* ===== GOOGLE TRANSLATE ===== */
+    .translate-box {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 3000;
+    }
+
+    #google_translate_element select {
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .goog-logo-link,
+    .goog-te-gadget span {
+      display: none !important;
+    }
+
+    .goog-te-gadget {
+      color: transparent !important;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- GOOGLE TRANSLATE BUTTON -->
+<div class="translate-box">
+  <div id="google_translate_element"></div>
+</div>
+
 <div class="container">
 
 <div class="badge">
@@ -147,7 +185,6 @@
 
 <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-<a class="btn btn-blue" href="pro-b-ar.html">🌍 Voir en arabe</a>
 <a class="btn btn-gray" href="index.html">🔙 Retour aux produits</a>
 
 <div class="important">
@@ -204,6 +241,21 @@ function sendWhatsApp() {
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 </script>
+
+<!-- GOOGLE TRANSLATE SCRIPT -->
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {
+      pageLanguage: 'fr',
+      includedLanguages: 'ar,en',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    },
+    'google_translate_element'
+  );
+}
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
