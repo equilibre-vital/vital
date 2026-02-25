@@ -13,12 +13,14 @@
       background: #f7f9fb;
       color: #222;
     }
+
     .container {
       max-width: 700px;
       margin: auto;
       background: #ffffff;
       padding: 20px;
     }
+
     h1 { color: #2e7d32; }
     h2 { margin-top: 30px; }
 
@@ -87,28 +89,41 @@
       color: #777;
       margin-top: 30px;
     }
-  </style>
-  #translate-box {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  background: #2e7d32;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  z-index: 9999;
-}
 
-#translate-box a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  margin: 0 4px;
-}
+    /* ===== BOUTON TRADUCTION ===== */
+    #translate-box {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: #2e7d32;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      z-index: 9999;
+    }
+
+    #translate-box a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 4px;
+    }
+  </style>
 </head>
 
 <body>
+
+<!-- Bouton traduction -->
+<div id="translate-box">
+  🌍
+  <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+
+<!-- Google Translate invisible -->
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
   <div class="badge">
@@ -133,21 +148,7 @@
 
   <p>🌿 Convient aux <strong>adultes et jeunes adultes</strong></p>
 
-  <div class="price">
-    Prix unitaire : 425 DH
-  </div>
-
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes : <strong>30 à 60 ml par jour</strong>, de préférence le matin à jeun.
-  </p>
-
-  <p>
-    <small>
-      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
-      Ne pas dépasser la dose journalière recommandée.
-    </small>
-  </p>
+  <div class="price">Prix unitaire : 425 DH</div>
 
   <h2>Commande</h2>
 
@@ -166,9 +167,7 @@
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
@@ -181,42 +180,6 @@
   <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
     Voir tous nos autres produits
   </a>
-
-  <div style="font-size:13px; line-height:1.6; color:#555; margin-top:30px;">
-    <hr>
-
-    <h3 style="font-size:15px;">Informations détaillées – Gel d'Aloe Vera Forever</h3>
-
-    <p>
-      Le <strong>Gel d'Aloe Vera Forever</strong> est une boisson à base de gel d’aloe vera stabilisé,
-      utilisée traditionnellement pour accompagner le confort digestif et soutenir
-      l’équilibre interne.
-    </p>
-
-    <p>
-      L’aloe vera est reconnu pour son utilisation ancestrale dans les routines de bien-être
-      et pour sa richesse naturelle.
-    </p>
-
-    <h4 style="font-size:14px;">Composition</h4>
-    <ul>
-      <li>Gel d’aloe vera stabilisé</li>
-      <li>Eau purifiée</li>
-      <li>Sans gluten</li>
-    </ul>
-
-    <h4 style="font-size:14px;">Conseils d’utilisation</h4>
-    <p>
-      Adultes : <strong>30 à 60 ml par jour</strong>, de préférence le matin à jeun.
-    </p>
-
-    <p>
-      <em>
-        Complément alimentaire. Ne remplace pas une alimentation équilibrée.<br>
-        Ne pas dépasser la dose journalière recommandée.
-      </em>
-    </p>
-  </div>
 
   <footer>
     © Équilibre Vitale – Tous droits réservés
@@ -235,12 +198,10 @@ function updateTotal() {
 
 function addToCart() {
   cartQty = document.getElementById("qty").value;
-  const total = cartQty * unitPrice;
-
   document.getElementById("cart").innerHTML =
     "<strong>Gel d'Aloe Vera</strong><br>" +
     "Quantité : " + cartQty + " bouteille(s)<br>" +
-    "Total : " + total + " DH";
+    "Total : " + (cartQty * unitPrice) + " DH";
 }
 
 function sendWhatsApp() {
@@ -249,23 +210,32 @@ function sendWhatsApp() {
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const total = cartQty * unitPrice;
-
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Gel d'Aloe Vera%0A" +
-    "Quantité : " + cartQty + " bouteille(s)%0A" +
-    "Total : " + total + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
+    "Bonjour,%0A%0ACommande : Gel d'Aloe Vera%0AQuantité : " +
+    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 </script>
+
+<script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    { pageLanguage: 'fr', autoDisplay: false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang) {
+  const select = document.querySelector("select.goog-te-combo");
+  if (select) {
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
 
 <section id="aloe-vera-pulpe-forever" style="padding:20px; line-height:1.7; font-size:15px;">
@@ -398,32 +368,5 @@ function sendWhatsApp() {
   </p>
 
 </section>
-  <script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement(
-    {pageLanguage: 'fr', autoDisplay: false},
-    'google_translate_element'
-  );
-}
-
-function setLang(lang) {
-  const select = document.querySelector("select.goog-te-combo");
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
-}
-</script>
-
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
-  <!-- Bouton traduction -->
-<div id="translate-box">
-  🌍 
-  <a href="#" onclick="setLang('ar')">العربية</a> | 
-  <a href="#" onclick="setLang('en')">English</a>
-</div>
-
-<!-- Google translate invisible -->
-<div id="google_translate_element" style="display:none;"></div>
 </html>
