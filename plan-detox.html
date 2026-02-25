@@ -137,10 +137,38 @@
       margin-top: 20px;
       line-height: 1.6;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Bouton traduction -->
+<div id="translate-box">
+  🌍
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
 <h1>Plan d’accompagnement – Détox & Gestion du poids</h1>
@@ -151,8 +179,7 @@
   et un apport nutritionnel adapté.<br><br>
 
   Ce plan détox propose une <strong>approche naturelle d’accompagnement</strong>
-  visant à soutenir l’organisme dans une démarche de bien-être global,
-  en complément d’une hygiène de vie saine.
+  visant à soutenir l’organisme dans une démarche de bien-être global.
 </div>
 
 <h2>Produits inclus dans le plan</h2>
@@ -165,41 +192,22 @@
 
 <h2>💚 Bienfaits des produits</h2>
 <div class="benefits">
-
   <p><strong>🔹 Gel d’Aloe Vera</strong><br>
-  Le Gel d’Aloe Vera contribue au confort digestif,
-  soutient l’hydratation interne
-  et accompagne les fonctions naturelles d’élimination.
-  Il est couramment utilisé dans les démarches de détox douce
-  et de rééquilibrage digestif.</p>
+  Soutient le confort digestif et les fonctions naturelles d’élimination.</p>
 
   <p><strong>🔹 Forever Lite Ultra</strong><br>
-  Forever Lite Ultra est un substitut ou complément nutritionnel
-  apportant des protéines, des fibres et des micronutriments essentiels.
-  Il aide à mieux contrôler les apports caloriques
-  tout en soutenant l’équilibre nutritionnel
-  dans une démarche de gestion du poids.</p>
+  Aide à mieux contrôler les apports caloriques tout en apportant des nutriments essentiels.</p>
 
   <p><strong>🔹 Pro-B</strong><br>
-  Pro-B contribue à l’équilibre de la flore intestinale,
-  soutient le confort digestif
-  et accompagne l’organisme lors des changements alimentaires,
-  notamment dans les périodes de détox ou de rééquilibrage.</p>
+  Contribue à l’équilibre de la flore intestinale et au confort digestif.</p>
 
   <p><strong>🔹 Fields of Greens</strong><br>
-  Riche en extraits de légumes verts,
-  Fields of Greens soutient l’apport en micronutriments,
-  favorise l’équilibre nutritionnel
-  et accompagne les personnes souhaitant améliorer
-  la qualité globale de leur alimentation.</p>
-
+  Soutient l’apport en micronutriments et l’équilibre nutritionnel.</p>
 </div>
 
 <h2>Mode d’utilisation</h2>
 <p>
-  👉 <strong>Le mode d’utilisation détaillé est communiqué au moment de la livraison</strong>,
-  afin d’assurer un accompagnement personnalisé
-  et adapté à chaque profil.
+  👉 <strong>Le mode d’utilisation détaillé est communiqué au moment de la livraison</strong>.
 </p>
 
 <h2>Prix du plan</h2>
@@ -218,19 +226,11 @@
 
 <div class="important">
   <strong>⚠️ Information importante</strong><br><br>
-  Ce plan détox est une <strong>approche d’accompagnement naturel</strong>.
-  Il ne constitue pas un traitement médical
-  et ne remplace ni un avis médical,
-  ni un suivi nutritionnel professionnel.<br><br>
-
-  Les résultats peuvent varier selon les personnes,
-  leur métabolisme,
-  leur alimentation
-  et leur régularité.
+  Ce plan est une approche d’accompagnement naturel
+  et ne remplace pas un avis médical.
 </div>
 
 <h2>Commander le plan</h2>
-<p><strong>🚚 Livraison gratuite partout au Maroc – sous 48h</strong></p>
 
 <input type="text" id="name" placeholder="Nom et prénom">
 <input type="tel" id="phone" placeholder="Téléphone">
@@ -248,29 +248,38 @@
 
 <script>
 function sendWhatsApp() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Plan Détox & Gestion du poids%0A" +
-    "Total : 1448 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
-
+    "Bonjour,%0A%0ACommande : Plan Détox & Gestion du poids%0ATotal : 1448 DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
 function sendAccompagnement() {
   const message =
-    "Bonjour,%0A%0A" +
-    "Je souhaite un accompagnement personnalisé pour le Plan Détox & Gestion du poids.";
-
+    "Bonjour,%0A%0AJe souhaite un accompagnement personnalisé pour le Plan Détox & Gestion du poids.";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
