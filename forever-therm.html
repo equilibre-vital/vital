@@ -45,11 +45,9 @@
       margin: 15px 0;
     }
 
-    ul {
-      margin-left: 20px;
-    }
+    ul { margin-left: 20px; }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin: 6px 0 15px;
@@ -78,6 +76,13 @@
       font-size: 15px;
     }
 
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
     .important {
       background: #fff6f6;
       border-left: 4px solid #d32f2f;
@@ -93,30 +98,51 @@
       color: #777;
       margin-top: 30px;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Traduction -->
+<div id="translate-box">
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
-  <!-- BADGE -->
   <div class="badge">
     ✅ Produit original – Forever Living<br>
     🚚 Livraison gratuite partout au Maroc – Paiement à la livraison
   </div>
 
-  <!-- TITRE -->
   <h1>Forever Therm</h1>
   <p><strong>Complément alimentaire à base de plantes pour soutenir le métabolisme et l’énergie.</strong></p>
 
-  <!-- IMAGE -->
-  <img
-    src="https://i.postimg.cc/bNW5H3Lf/Screenshot-20260218-203526-Chrome.jpg"
-    alt="Forever Therm"
-    class="product-img"
-  />
+  <img src="https://i.postimg.cc/bNW5H3Lf/Screenshot-20260218-203526-Chrome.jpg"
+       alt="Forever Therm"
+       class="product-img" />
 
-  <!-- POURQUOI -->
   <h2>Pourquoi choisir Forever Therm ?</h2>
   <ul>
     <li>✔️ Contribue à l’activation du métabolisme</li>
@@ -125,27 +151,25 @@
     <li>✔️ Formule à base d’extraits de plantes</li>
   </ul>
 
-  <!-- UTILISATION -->
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes.<br>
-    <strong>Prendre 1 capsule le matin et 1 capsule en début d’après-midi.</strong>
-  </p>
+  <div class="price">Prix unitaire : 488 DH</div>
 
-  <p>
-    <small>
-      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
-      Ne pas dépasser la dose journalière recommandée.
-    </small>
-  </p>
-
-  <!-- PRIX -->
-  <div class="price">
-    Prix unitaire : 488 DH
-  </div>
-
-  <!-- COMMANDE -->
   <h2>Commander</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+  </select>
+
+  <div class="price">Total : <span id="total">488</span> DH</div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
+
+  <h2>Informations de livraison</h2>
 
   <input type="text" id="name" placeholder="Nom et prénom">
   <input type="tel" id="phone" placeholder="Téléphone">
@@ -153,42 +177,66 @@
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    🔙 Voir nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">🔙 Voir nos autres produits</a>
 
-  <!-- INFO IMPORTANTE -->
   <div class="important">
     <strong>⚠️ Information importante</strong><br><br>
     Forever Therm est un complément alimentaire destiné à accompagner
-    un mode de vie sain. Il ne constitue pas un traitement médical
-    et ne remplace ni un avis médical ni un traitement prescrit
-    par un professionnel de santé.
+    un mode de vie sain.
   </div>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
 
 <script>
-function sendWhatsApp() {
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+const unitPrice = 488;
+let cartQty = 0;
 
+function updateTotal(){
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Therm</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp(){
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Forever Therm%0A" +
-    "Prix : 488 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
-
+    "Bonjour,%0A%0ACommande : Forever Therm%0AQuantité : " +
+    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    {pageLanguage:'fr', autoDisplay:false},
+    'google_translate_element'
+  );
+}
+function setLang(lang){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 <hr>
 
 <section id="therm-bruleur-graisses-forever" style="padding:20px; line-height:1.7; font-size:15px;">
