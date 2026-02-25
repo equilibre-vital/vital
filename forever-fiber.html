@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Forever Fiber – Confort digestif | Équilibre Vitale</title>
+  <title>Forever Fiber – Confort digestif | Équilibre Vital</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -50,7 +49,7 @@
       margin:15px 0;
     }
 
-    input, textarea{
+    input, textarea, select{
       width:100%;
       padding:10px;
       margin:6px 0 15px;
@@ -79,11 +78,11 @@
       font-size:15px;
     }
 
-    footer{
-      text-align:center;
-      font-size:13px;
-      color:#777;
-      margin-top:30px;
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:15px;
     }
 
     .important{
@@ -94,10 +93,44 @@
       font-size:14px;
       line-height:1.6;
     }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+
+    /* ===== TRADUCTION ===== */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- Traduction -->
+<div id="translate-box">
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
   <div class="badge">
@@ -120,71 +153,90 @@
     <li>✔️ Fibres douces, bien tolérées</li>
   </ul>
 
-  <p>
-    Forever Fiber contient des <strong>fibres hydrosolubles</strong> qui gonflent au contact de l’eau,
-    aidant ainsi à stimuler naturellement les fonctions intestinales et à améliorer le confort digestif.
-  </p>
-
-  <div class="price">
-    Prix unitaire : 327 DH
-  </div>
-
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes.<br>
-    <strong>1 à 2 doses par jour</strong>, mélangées dans un grand verre d’eau ou de jus,
-    de préférence avant ou pendant les repas.
-  </p>
-
-  <p>
-    <small>
-      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
-      Ne pas dépasser la dose journalière recommandée.
-    </small>
-  </p>
+  <div class="price">Prix unitaire : 327 DH</div>
 
   <h2>Commander</h2>
 
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">327</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
+
+  <h2>Informations de livraison</h2>
   <input type="text" id="name" placeholder="Nom et prénom">
   <input type="tel" id="phone" placeholder="Téléphone">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    🔙 Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">🔙 Voir tous nos autres produits</a>
 
   <div class="important">
     <strong>⚠️ Information importante</strong><br><br>
-    Ce produit s’inscrit dans une <strong>démarche de bien-être naturel</strong>.
-    Il ne constitue pas un traitement médical et ne remplace ni un avis médical,
-    ni un traitement prescrit par un professionnel de santé.
+    Ce produit est un complément alimentaire.
+    Il ne remplace ni un traitement médical
+    ni un avis professionnel.
   </div>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
-
+  <footer>© Équilibre Vital – Tous droits réservés</footer>
 </div>
 
 <script>
+const unitPrice = 327;
+let cartQty = 0;
+
+function updateTotal(){
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Fiber</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
 function sendWhatsApp(){
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Forever Fiber%0A" +
-    "Prix : 327 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
-
+    "Bonjour,%0A%0ACommande : Forever Fiber%0AQuantité : " +
+    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    {pageLanguage:'fr', autoDisplay:false},
+    'google_translate_element'
+  );
+}
+function setLang(lang){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
 
 <section id="forever-fiber-hydrosoluble" style="padding:20px; line-height:1.7; font-size:15px;">
