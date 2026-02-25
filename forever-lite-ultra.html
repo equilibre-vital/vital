@@ -9,7 +9,6 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      padding: 0;
       background: #f7f9fb;
       color: #222;
     }
@@ -45,11 +44,9 @@
       margin: 15px 0;
     }
 
-    ul {
-      margin-left: 20px;
-    }
+    ul { margin-left: 20px; }
 
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin: 6px 0 15px;
@@ -62,7 +59,7 @@
       display: block;
       text-align: center;
       background: #25d366;
-      color: white;
+      color: #fff;
       padding: 15px;
       border-radius: 8px;
       font-size: 18px;
@@ -76,6 +73,13 @@
     .btn-secondary {
       background: #1976d2;
       font-size: 15px;
+    }
+
+    .cart {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
     }
 
     .important {
@@ -93,30 +97,52 @@
       color: #777;
       margin-top: 30px;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Traduction -->
+<div id="translate-box">
+  🌍 
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
-  <!-- BADGE -->
   <div class="badge">
     ✅ Produit original – Forever Living<br>
     🚚 Livraison gratuite partout au Maroc – Paiement à la livraison
   </div>
 
-  <!-- TITRE -->
   <h1>Forever Lite Ultra</h1>
   <p><strong>Substitut de repas protéiné pour accompagner la gestion du poids et l’équilibre nutritionnel.</strong></p>
 
-  <!-- IMAGE -->
-  <img
-    src="https://i.postimg.cc/7ZwqHCnm/Screenshot-20260219-232345-Chrome.jpg"
-    alt="Forever Lite Ultra"
-    class="product-img"
-  />
+  <img src="https://i.postimg.cc/7ZwqHCnm/Screenshot-20260219-232345-Chrome.jpg"
+       alt="Forever Lite Ultra"
+       class="product-img">
 
-  <!-- POURQUOI -->
   <h2>Pourquoi choisir Forever Lite Ultra ?</h2>
   <ul>
     <li>✔️ Apport élevé en protéines de qualité</li>
@@ -125,28 +151,29 @@
     <li>✔️ Peut remplacer un repas dans un programme minceur</li>
   </ul>
 
-  <!-- UTILISATION -->
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes.<br>
-    <strong>Mélanger une portion avec de l’eau ou du lait végétal.</strong><br>
-    À consommer en remplacement ou en complément d’un repas.
-  </p>
+  <div class="price">Prix unitaire : 344 DH</div>
 
-  <p>
-    <small>
-      Complément alimentaire – ne remplace pas une alimentation équilibrée.<br>
-      Ne pas dépasser la dose journalière recommandée.
-    </small>
-  </p>
+  <h2>Commander</h2>
 
-  <!-- PRIX -->
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+  </select>
+
   <div class="price">
-    Prix unitaire : 344 DH
+    Total : <span id="total">344</span> DH
   </div>
 
-  <!-- COMMANDE -->
-  <h2>Commander</h2>
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
 
   <input type="text" id="name" placeholder="Nom et prénom">
   <input type="tel" id="phone" placeholder="Téléphone">
@@ -158,12 +185,11 @@
     🔙 Voir nos autres produits
   </a>
 
-  <!-- INFO IMPORTANTE -->
   <div class="important">
     <strong>⚠️ Information importante</strong><br><br>
     Forever Lite Ultra est destiné à accompagner un programme alimentaire équilibré
-    et une hygiène de vie saine. Il ne constitue pas un traitement médical
-    et ne remplace ni un avis médical ni un suivi nutritionnel professionnel.
+    et une hygiène de vie saine.
+    Il ne remplace ni un avis médical ni un suivi nutritionnel professionnel.
   </div>
 
   <footer>
@@ -173,7 +199,28 @@
 </div>
 
 <script>
-function sendWhatsApp() {
+const unitPrice = 344;
+let cartQty = 0;
+
+function updateTotal(){
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Lite Ultra</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp(){
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const address = document.getElementById("address").value;
@@ -181,14 +228,39 @@ function sendWhatsApp() {
   const message =
     "Bonjour,%0A%0A" +
     "Commande : Forever Lite Ultra%0A" +
-    "Prix : 344 DH%0A%0A" +
+    "Quantité : " + cartQty + " boîte(s)%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
     "Nom : " + name + "%0A" +
     "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
+    "Adresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 <hr>
 
 <section id="lite-ultra-vanille-forever" style="padding:20px; line-height:1.7; font-size:15px;">
