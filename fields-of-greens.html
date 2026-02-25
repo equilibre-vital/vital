@@ -1,112 +1,142 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Field of Greens – Forever</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fields of Greens – Forever | Équilibre Vital</title>
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fb;
-      color: #222;
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:#f7f9fb;
+      margin:0;
+      padding:15px;
+      color:#222;
     }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
     }
-    h1 { color: #2e7d32; }
-    h2 { margin-top: 30px; }
+    h1{color:#2e7d32}
+    h2{margin-top:30px}
 
-    .badge {
-      background: #e8f5e9;
-      color: #2e7d32;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
-
-    .product-img {
-      width: 100%;
-      max-width: 320px;
-      display: block;
-      margin: 20px auto;
+    .badge{
+      background:#e8f5e9;
+      color:#2e7d32;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
     }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      color: #d32f2f;
-      margin: 15px 0;
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:8px;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+    ul{margin-left:20px}
+
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
     }
 
-    .btn {
-      display: block;
-      text-align: center;
-      background: #25d366;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 15px 0;
-      border: none;
-      cursor: pointer;
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
     }
 
-    .btn-secondary {
-      background: #1976d2;
-      font-size: 15px;
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:white;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      text-decoration:none;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
     }
 
-    .cart {
-      background: #f1f1f1;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
+    .btn-secondary{
+      background:#1976d2;
+      font-size:15px;
     }
 
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      margin-top: 30px;
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:15px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+
+    /* ===== TRADUCTION ===== */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
     }
   </style>
 </head>
 
 <body>
+
+<!-- Bouton traduction -->
+<div id="translate-box">
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
   <div class="badge">
-    ✅ Produit original – Field of Greens Forever<br>
+    ✅ Produit original – Forever Living<br>
     🚚 Livraison partout au Maroc – Paiement à la livraison
   </div>
 
-  <h1>Field of Greens</h1>
+  <h1>Fields of Greens</h1>
   <p><strong>Complément naturel à base de fruits et légumes pour soutenir la vitalité et l’équilibre nutritionnel.</strong></p>
 
-  <!-- IMAGE CORRIGÉE -->
   <img src="https://i.postimg.cc/ZqPcZYrh/Screenshot-20260219-154733-Google.jpg"
-       class="product-img"
-       alt="Field of Greens Forever">
+       alt="Fields of Greens Forever"
+       class="product-img">
 
-  <h2>Pourquoi choisir Field of Greens ?</h2>
+  <h2>Pourquoi choisir Fields of Greens ?</h2>
   <ul>
     <li>✔️ Apporte des nutriments essentiels issus de fruits et légumes</li>
     <li>✔️ Soutient l’énergie et la vitalité quotidienne</li>
@@ -114,18 +144,9 @@
     <li>✔️ Facile à intégrer au quotidien</li>
   </ul>
 
-  <p>🌱 Convient aux <strong>adultes</strong></p>
+  <div class="price">Prix unitaire : 196 DH</div>
 
-  <div class="price">
-    Prix unitaire : 196 DH
-  </div>
-
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes : <strong>1 comprimé par jour</strong>, de préférence pendant un repas.
-  </p>
-
-  <h2>Commande</h2>
+  <h2>Commander</h2>
 
   <label>Quantité</label>
   <select id="qty" onchange="updateTotal()">
@@ -133,7 +154,6 @@
     <option value="2">2 boîtes</option>
     <option value="3">3 boîtes</option>
     <option value="4">4 boîtes</option>
-    <option value="5">5 boîtes</option>
   </select>
 
   <div class="price">
@@ -142,25 +162,18 @@
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
-
   <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
+  <input type="tel" id="phone" placeholder="Téléphone">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">🔙 Voir tous nos autres produits</a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vital – Tous droits réservés</footer>
 
 </div>
 
@@ -168,44 +181,50 @@
 const unitPrice = 196;
 let cartQty = 0;
 
-function updateTotal() {
+function updateTotal(){
   const qty = document.getElementById("qty").value;
   document.getElementById("total").innerText = qty * unitPrice;
 }
 
-function addToCart() {
+function addToCart(){
   cartQty = document.getElementById("qty").value;
-  const total = cartQty * unitPrice;
-
   document.getElementById("cart").innerHTML =
-    "<strong>Field of Greens</strong><br>" +
+    "<strong>Fields of Greens</strong><br>" +
     "Quantité : " + cartQty + " boîte(s)<br>" +
-    "Total : " + total + " DH";
+    "Total : " + (cartQty * unitPrice) + " DH";
 }
 
-function sendWhatsApp() {
-  if (cartQty === 0) {
+function sendWhatsApp(){
+  if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
-
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
-  const total = cartQty * unitPrice;
-
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Field of Greens%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + total + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
-
+    "Bonjour,%0A%0ACommande : Fields of Greens%0AQuantité : " +
+    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    {pageLanguage:'fr', autoDisplay:false},
+    'google_translate_element'
+  );
+}
+function setLang(lang){
+  const select = document.querySelector("select.goog-te-combo");
+  if(select){
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 <hr>
 
 <section id="fields-of-greens-forever" style="padding:20px; line-height:1.7; font-size:15px;">
