@@ -88,6 +88,24 @@
       margin-top: 30px;
     }
   </style>
+  #translate-box {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: #2e7d32;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 9999;
+}
+
+#translate-box a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 4px;
+}
 </head>
 
 <body>
@@ -380,5 +398,32 @@ function sendWhatsApp() {
   </p>
 
 </section>
+  <script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {pageLanguage: 'fr', autoDisplay: false},
+    'google_translate_element'
+  );
+}
+
+function setLang(lang) {
+  const select = document.querySelector("select.goog-te-combo");
+  if (select) {
+    select.value = lang;
+    select.dispatchEvent(new Event("change"));
+  }
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
+  <!-- Bouton traduction -->
+<div id="translate-box">
+  🌍 
+  <a href="#" onclick="setLang('ar')">العربية</a> | 
+  <a href="#" onclick="setLang('en')">English</a>
+</div>
+
+<!-- Google translate invisible -->
+<div id="google_translate_element" style="display:none;"></div>
 </html>
