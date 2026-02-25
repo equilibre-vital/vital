@@ -9,7 +9,6 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      padding: 0;
       background: #f7f9fb;
       color: #222;
     }
@@ -59,7 +58,7 @@
       display: block;
       text-align: center;
       background: #25d366;
-      color: white;
+      color: #fff;
       padding: 15px;
       border-radius: 8px;
       font-size: 18px;
@@ -88,10 +87,38 @@
       color: #777;
       margin-top: 30px;
     }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
   </style>
 </head>
 
 <body>
+
+<!-- 🌍 Traduction -->
+<div id="translate-box">
+  🌍 
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
 <div class="container">
 
   <div class="badge">
@@ -120,9 +147,7 @@
     et au bon fonctionnement musculaire.
   </p>
 
-  <div class="price">
-    Prix unitaire : 275 DH
-  </div>
+  <div class="price">Prix unitaire : 275 DH</div>
 
   <h2>Conseils d’utilisation</h2>
   <p>
@@ -137,7 +162,7 @@
     </small>
   </p>
 
-  <h2>Commande</h2>
+  <h2>Commander</h2>
 
   <label>Quantité</label>
   <select id="qty" onchange="updateTotal()">
@@ -180,23 +205,21 @@
 const unitPrice = 275;
 let cartQty = 0;
 
-function updateTotal() {
+function updateTotal(){
   const qty = document.getElementById("qty").value;
   document.getElementById("total").innerText = qty * unitPrice;
 }
 
-function addToCart() {
+function addToCart(){
   cartQty = document.getElementById("qty").value;
-  const total = cartQty * unitPrice;
-
   document.getElementById("cart").innerHTML =
     "<strong>Forever Calcium</strong><br>" +
     "Quantité : " + cartQty + " boîte(s)<br>" +
-    "Total : " + total + " DH";
+    "Total : " + (cartQty * unitPrice) + " DH";
 }
 
-function sendWhatsApp() {
-  if (cartQty === 0) {
+function sendWhatsApp(){
+  if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
@@ -204,75 +227,43 @@ function sendWhatsApp() {
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
   const address = document.getElementById("address").value;
-  const total = cartQty * unitPrice;
 
   const message =
     "Bonjour,%0A%0A" +
     "Commande : Forever Calcium%0A" +
     "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + total + " DH%0A%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
     "Nom : " + name + "%0A" +
     "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
+    "Adresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
+
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
 </script>
 
-<hr>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-<section id="description-complete-calcium" style="padding:20px; line-height:1.7; font-size:15px;">
-
-  <h2>🟢 FOREVER CALCIUM – SOLIDITÉ OSSEUSE & MUSCULAIRE</h2>
-
-  <h3>🦴 Un minéral essentiel à chaque étape de la vie</h3>
-
-  <p>
-    Le calcium est un minéral indispensable à la construction et au maintien
-    de la structure osseuse et dentaire. Il joue également un rôle clé
-    dans la contraction musculaire et la transmission nerveuse.
-  </p>
-
-  <p>
-    Avec l’âge, le stress, certaines habitudes alimentaires ou des besoins accrus,
-    les apports en calcium peuvent devenir insuffisants.
-    <strong>Forever Calcium</strong> aide à compléter ces apports afin de préserver
-    la solidité osseuse et la vitalité au quotidien.
-  </p>
-
-  <h3>🌿 Une formule adaptée et bien assimilée</h3>
-
-  <p>
-    La formule de <strong>Forever Calcium</strong> est conçue pour offrir
-    une bonne biodisponibilité du calcium, facilitant son assimilation
-    par l’organisme et son utilisation par les os et les muscles.
-  </p>
-
-  <p>
-    Une supplémentation régulière contribue à soutenir la santé osseuse,
-    à réduire les risques de fragilisation et à maintenir une bonne fonction musculaire.
-  </p>
-
-  <h3>🧪 Informations produit</h3>
-
-  <p><strong>Référence :</strong> 394</p>
-  <p><strong>Forme :</strong> Comprimés</p>
-
-  <h3>📌 Conseils d’utilisation</h3>
-  <p>
-    Prendre <strong>1 à 2 comprimés par jour</strong>, de préférence au cours d’un repas.
-  </p>
-
-  <h3>💚 Bienfaits de Forever Calcium</h3>
-  <ul>
-    <li>Aide à maintenir des os solides</li>
-    <li>Contribue à la santé des dents</li>
-    <li>Soutient la fonction musculaire normale</li>
-    <li>Participe à la vitalité générale</li>
-    <li>Convient à une utilisation quotidienne</li>
-  </ul>
-
-</section>
+</body>
+</html>
   <hr>
 
 <section id="complement-calcium-forever" style="padding:20px; line-height:1.7; font-size:15px;">
