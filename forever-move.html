@@ -88,7 +88,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,7 +110,6 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
@@ -136,17 +134,10 @@
   <h2>Pourquoi choisir Forever Move ?</h2>
   <ul>
     <li>✔️ Soutient la mobilité articulaire</li>
-    <li>✔️ Aide à préserver la souplesse des articulations</li>
+    <li>✔️ Aide à préserver la souplesse</li>
     <li>✔️ Contribue au confort musculaire</li>
     <li>✔️ Favorise une meilleure qualité de mouvement</li>
   </ul>
-
-  <p>
-    <strong>Forever Move</strong> associe des ingrédients reconnus
-    pour accompagner les articulations et les muscles,
-    particulièrement chez les personnes actives,
-    sportives ou souhaitant préserver leur mobilité au quotidien.
-  </p>
 
   <div class="price">Prix unitaire : 821 DH</div>
 
@@ -161,21 +152,17 @@
     <option value="5">5 boîtes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">821</span> DH
-  </div>
+  <div class="price">Total : <span id="total">821</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
-  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom" required>
+  <input type="tel" id="phone" placeholder="Téléphone" required>
+  <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
@@ -183,56 +170,9 @@
     Voir tous nos autres produits
   </a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
-
-<hr>
-
-<section style="padding:20px; line-height:1.7; font-size:15px; max-width:700px; margin:auto; background:#fff;">
-
-  <h2>🦴 FOREVER MOVE</h2>
-  <h3>Mobilité, souplesse et confort articulaire</h3>
-
-  <p>
-    Forever Move est formulé pour accompagner
-    les articulations et les muscles
-    dans le cadre d’un mode de vie actif.
-    Il aide à préserver la souplesse,
-    la fluidité des mouvements
-    et le confort articulaire.
-  </p>
-
-  <p>
-    Il est particulièrement apprécié
-    par les personnes actives,
-    les sportifs,
-    ou celles ressentant
-    une gêne articulaire liée à l’âge
-    ou à l’effort.
-  </p>
-
-  <h3>🧴 Informations produit</h3>
-  <p><strong>Forme :</strong> Comprimés</p>
-
-  <h3>🧴 Conseils d’utilisation</h3>
-  <p>
-    Prendre selon les recommandations indiquées
-    sur l’emballage ou celles d’un professionnel de santé.
-  </p>
-
-  <h3>✨ Bienfaits</h3>
-  <ul>
-    <li>Soutient la mobilité articulaire</li>
-    <li>Aide à maintenir la souplesse</li>
-    <li>Contribue au confort musculaire</li>
-    <li>Favorise une activité quotidienne plus fluide</li>
-    <li><strong>Sans gluten</strong></li>
-  </ul>
-
-</section>
 
 <script>
 const unitPrice = 821;
@@ -257,9 +197,14 @@ function sendWhatsApp(){
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
 
   const message =
     "Bonjour,%0A%0A" +
@@ -273,7 +218,6 @@ function sendWhatsApp(){
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
-/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -292,6 +236,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
