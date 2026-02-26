@@ -7,7 +7,7 @@
 
   <style>
     body{
-      font-family:Arial, Helvetica, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       margin:0;
       background:#f7f9fb;
       color:#222;
@@ -63,15 +63,15 @@
       border-radius:8px;
       font-size:18px;
       font-weight:bold;
+      text-decoration:none;
+      margin:15px 0;
       border:none;
       cursor:pointer;
-      margin:15px 0;
     }
 
     .btn-secondary{
       background:#1976d2;
       font-size:15px;
-      text-decoration:none;
     }
 
     .cart{
@@ -88,6 +88,7 @@
       margin-top:30px;
     }
 
+    /* Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -101,8 +102,8 @@
     }
     #translate-box a{
       color:#fff;
-      font-weight:bold;
       text-decoration:none;
+      font-weight:bold;
       margin:0 4px;
     }
   </style>
@@ -110,11 +111,12 @@
 
 <body>
 
+<!-- 🌍 Traduction -->
 <div id="translate-box">
-  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
-  <a href="#" onclick="setLang('en')">English</a>
+  🌍
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
-
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -127,7 +129,9 @@
   <h1>Garlic-Thym</h1>
   <p><strong>Complément alimentaire à base d’ail et de thym pour soutenir les défenses naturelles et le bien-être respiratoire.</strong></p>
 
-  <img src="https://i.postimg.cc/bwdn2bw3/Screenshot-20260225-191953-Google.jpg" class="product-img">
+  <img src="https://i.postimg.cc/bwdn2bw3/Screenshot-20260225-191953-Google.jpg"
+       alt="Garlic Thym Forever"
+       class="product-img">
 
   <h2>Pourquoi choisir Garlic-Thym ?</h2>
   <ul>
@@ -139,8 +143,16 @@
 
   <div class="price">Prix unitaire : 296 DH</div>
 
+  <h2>Conseils d’utilisation</h2>
+  <p>
+    Prendre <strong>2 à 4 comprimés par jour</strong>,
+    de préférence au cours des repas,
+    avec un verre d’eau.
+  </p>
+
   <h2>Commande</h2>
 
+  <label>Quantité</label>
   <select id="qty" onchange="updateTotal()">
     <option value="1">1 boîte</option>
     <option value="2">2 boîtes</option>
@@ -156,61 +168,87 @@
   <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
-  <input id="name" placeholder="Nom et prénom">
-  <input id="phone" placeholder="Téléphone / WhatsApp">
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
-  <a class="btn btn-secondary" href="index.html">Voir tous nos produits</a>
+
+  <a class="btn btn-secondary" href="index.html">
+    Voir tous nos autres produits
+  </a>
 
   <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
-
-<section style="max-width:700px;margin:30px auto;padding:20px;background:#fff;line-height:1.7">
-  <h2>🌿 COMPLÉMENT AIL & THYM FOREVER</h2>
-  <p>Association traditionnelle reconnue pour soutenir les défenses naturelles, le confort digestif et la circulation.</p>
-  <ul>
-    <li>Améliore la circulation sanguine</li>
-    <li>Soutient le cœur</li>
-    <li>Réduit la fatigue passagère</li>
-    <li><strong>Sans gluten</strong></li>
-  </ul>
-</section>
 
 <script>
 const unitPrice = 296;
 let cartQty = 0;
 
 function updateTotal(){
-  total.innerText = qty.value * unitPrice;
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
 }
 
 function addToCart(){
-  cartQty = qty.value;
-  cart.innerHTML = "<strong>Garlic-Thym</strong><br>Quantité : "+cartQty+"<br>Total : "+(cartQty*unitPrice)+" DH";
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Garlic-Thym</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
 }
 
 function sendWhatsApp(){
-  if(!cartQty) return alert("Ajoutez le produit.");
-  if(!name.value||!phone.value||!address.value) return alert("Champs manquants.");
-  const msg =
-    "Commande Garlic-Thym%0AQuantité : "+cartQty+
-    "%0ATotal : "+(cartQty*unitPrice)+" DH%0A%0A"+
-    "Nom : "+name.value+
-    "%0ATéléphone : "+phone.value+
-    "%0AAdresse : "+address.value;
-  window.open("https://wa.me/212752789277?text="+msg);
+
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const nameField = document.getElementById("name");
+  const phoneField = document.getElementById("phone");
+  const addressField = document.getElementById("address");
+
+  const name = nameField.value.trim();
+  const phone = phoneField.value.trim();
+  const address = addressField.value.trim();
+
+  if(name === "" || phone === "" || address === ""){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Garlic-Thym (Ail & Thym)%0A" +
+    "Quantité : " + cartQty + " boîte(s)%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
+/* Google Translate */
 function googleTranslateElementInit(){
-  new google.translate.TranslateElement({pageLanguage:'fr'}, 'google_translate_element');
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
 }
-function setLang(l){
-  const i=setInterval(()=>{
-    const s=document.querySelector(".goog-te-combo");
-    if(s){s.value=l;s.dispatchEvent(new Event("change"));clearInterval(i);}
-  },300);
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
 }
 </script>
 
