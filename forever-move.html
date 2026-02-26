@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever Move – Articulations & mobilité</title>
 
+  <style>
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+    }
+    h1{color:#2e7d32;}
+    h2{margin-top:30px;}
+
+    .badge{
+      background:#e8f5e9;
+      color:#2e7d32;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
+    }
+
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:6px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
+    }
+
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      text-decoration:none;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-secondary{
+      background:#1976d2;
+      font-size:15px;
+    }
+
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🌍 Traduction -->
+<div id="translate-box">
+  🌍
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+
+  <div class="badge">
+    🦴 Articulations & mobilité<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Forever Move</h1>
+  <p><strong>Complément alimentaire conçu pour aider à maintenir la souplesse des articulations et le confort musculaire.</strong></p>
+
+  <img src="https://i.postimg.cc/50YbqLCn/Screenshot-20260226-203404-Google.jpg"
+       class="product-img"
+       alt="Forever Move">
+
+  <h2>Pourquoi choisir Forever Move ?</h2>
+  <ul>
+    <li>✔️ Soutient la mobilité articulaire</li>
+    <li>✔️ Aide à préserver la souplesse des articulations</li>
+    <li>✔️ Contribue au confort musculaire</li>
+    <li>✔️ Favorise une meilleure qualité de mouvement</li>
+  </ul>
+
+  <p>
+    <strong>Forever Move</strong> associe des ingrédients reconnus
+    pour accompagner les articulations et les muscles,
+    particulièrement chez les personnes actives,
+    sportives ou souhaitant préserver leur mobilité au quotidien.
+  </p>
+
+  <div class="price">Prix unitaire : 821 DH</div>
+
+  <h2>Commander</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">
+    Total : <span id="total">821</span> DH
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">
+    Aucun produit ajouté.
+  </div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="index.html">
+    Voir tous nos autres produits
+  </a>
+
+  <footer>
+    © Équilibre Vitale – Tous droits réservés
+  </footer>
+
+</div>
+
+<hr>
+
+<section style="padding:20px; line-height:1.7; font-size:15px; max-width:700px; margin:auto; background:#fff;">
+
+  <h2>🦴 FOREVER MOVE</h2>
+  <h3>Mobilité, souplesse et confort articulaire</h3>
+
+  <p>
+    Forever Move est formulé pour accompagner
+    les articulations et les muscles
+    dans le cadre d’un mode de vie actif.
+    Il aide à préserver la souplesse,
+    la fluidité des mouvements
+    et le confort articulaire.
+  </p>
+
+  <p>
+    Il est particulièrement apprécié
+    par les personnes actives,
+    les sportifs,
+    ou celles ressentant
+    une gêne articulaire liée à l’âge
+    ou à l’effort.
+  </p>
+
+  <h3>🧴 Informations produit</h3>
+  <p><strong>Forme :</strong> Comprimés</p>
+
+  <h3>🧴 Conseils d’utilisation</h3>
+  <p>
+    Prendre selon les recommandations indiquées
+    sur l’emballage ou celles d’un professionnel de santé.
+  </p>
+
+  <h3>✨ Bienfaits</h3>
+  <ul>
+    <li>Soutient la mobilité articulaire</li>
+    <li>Aide à maintenir la souplesse</li>
+    <li>Contribue au confort musculaire</li>
+    <li>Favorise une activité quotidienne plus fluide</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+
+<script>
+const unitPrice = 821;
+let cartQty = 0;
+
+function updateTotal(){
+  const qty = document.getElementById("qty").value;
+  document.getElementById("total").innerText = qty * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Move</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp(){
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+
+  const message =
+    "Bonjour,%0A%0A" +
+    "Commande : Forever Move%0A" +
+    "Quantité : " + cartQty + " boîte(s)%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
+  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+}
+
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
