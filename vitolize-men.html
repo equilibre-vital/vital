@@ -9,7 +9,6 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       margin: 0;
-      padding: 0;
       background: #f7f9fb;
       color: #222;
     }
@@ -88,7 +87,6 @@
       margin-top: 30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,7 +109,6 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
@@ -127,28 +124,21 @@
   </div>
 
   <h1>Vitolize Men</h1>
-  <p><strong>Complément nutritionnel spécialement formulé pour soutenir l’énergie, la vitalité et le bien-être masculin.</strong></p>
+  <p><strong>Complément nutritionnel formulé pour soutenir l’énergie, la vitalité et le bien-être masculin.</strong></p>
 
   <img src="https://i.postimg.cc/nLByRtN9/Screenshot-20260223-210959-Google.jpg"
        class="product-img"
-       alt="Vitolize Men Forever">
+       alt="Vitolize Men">
 
   <h2>Pourquoi choisir Vitolize Men ?</h2>
   <ul>
     <li>✔️ Apporte des nutriments essentiels pour l’énergie masculine</li>
     <li>✔️ Contribue à la vitalité et au bien-être général</li>
     <li>✔️ Soutient les performances au quotidien</li>
-    <li>✔️ Formule adaptée aux besoins spécifiques des hommes</li>
+    <li>✔️ Formule adaptée aux besoins des hommes</li>
   </ul>
 
-  <p>💪 Convient aux <strong>hommes adultes</strong></p>
-
   <div class="price">Prix unitaire : 458 DH</div>
-
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Adultes : <strong>1 comprimé par jour</strong>, de préférence au cours d’un repas.
-  </p>
 
   <h2>Commande</h2>
 
@@ -169,13 +159,13 @@
 
   <h2>Informations de livraison</h2>
 
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
-  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom" required>
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp" required>
+  <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
+  <a class="btn btn-secondary" href="index.html">
     Voir tous nos autres produits
   </a>
 
@@ -206,9 +196,14 @@ function sendWhatsApp(){
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
 
   const message =
     "Bonjour,%0A%0A" +
@@ -217,12 +212,11 @@ function sendWhatsApp(){
     "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
     "Nom : " + name + "%0A" +
     "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
+    "Adresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
-/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -241,6 +235,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
