@@ -112,10 +112,9 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
 <div id="translate-box">
-  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
-  <a href="#" onclick="setLang('en')">English</a>
+  🌍 <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
 <div id="google_translate_element" style="display:none;"></div>
 
@@ -162,9 +161,9 @@
 
   <h2>Informations de livraison</h2>
 
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
-  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom" required>
+  <input type="tel" id="phone" placeholder="Téléphone" required>
+  <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
@@ -198,9 +197,25 @@ function sendWhatsApp(){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
+
   const message =
-    "Bonjour,%0A%0ACommande : Activateur%0AQuantité : " +
-    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
+    "Bonjour,%0A%0A" +
+    "Commande : Activateur%0A" +
+    "Quantité : " + cartQty + "%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
@@ -212,13 +227,21 @@ function googleTranslateElementInit(){
   );
 }
 function setLang(lang){
-  const select = document.querySelector("select.goog-te-combo");
-  if(select){
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
