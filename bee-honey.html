@@ -6,87 +6,86 @@
   <title>Bee Honey – Miel naturel & vitalité</title>
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fb;
-      color: #222;
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
     }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
     }
-    h1 { color: #2e7d32; }
-    h2 { margin-top: 30px; }
+    h1{color:#2e7d32}
+    h2{margin-top:30px}
 
-    .badge {
-      background: #fff8e1;
-      color: #8d6e63;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
-
-    .product-img {
-      width: 100%;
-      max-width: 320px;
-      display: block;
-      margin: 20px auto;
-      border-radius: 6px;
+    .badge{
+      background:#fff8e1;
+      color:#8d6e63;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
     }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      color: #d32f2f;
-      margin: 15px 0;
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:6px;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
     }
 
-    .btn {
-      display: block;
-      text-align: center;
-      background: #25d366;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 15px 0;
-      border: none;
-      cursor: pointer;
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
     }
 
-    .btn-secondary {
-      background: #1976d2;
-      font-size: 15px;
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      text-decoration:none;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
     }
 
-    .cart {
-      background: #f1f1f1;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
+    .btn-secondary{
+      background:#1976d2;
+      font-size:15px;
     }
 
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      margin-top: 30px;
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
     }
 
     /* 🌍 Traduction */
@@ -112,7 +111,7 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
+<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
@@ -143,17 +142,11 @@
   </ul>
 
   <p>
-    🍯 <strong>Bee Honey</strong> est un miel naturel sélectionné pour sa qualité,
+    <strong>Bee Honey</strong> est un miel naturel sélectionné pour sa qualité,
     idéal pour soutenir la vitalité au quotidien.
   </p>
 
   <div class="price">Prix unitaire : 274 DH</div>
-
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Prendre <strong>1 à 2 cuillères par jour</strong>, seul ou mélangé à une boisson tiède
-    ou à un aliment.
-  </p>
 
   <h2>Commande</h2>
 
@@ -166,7 +159,9 @@
     <option value="5">5 pots</option>
   </select>
 
-  <div class="price">Total : <span id="total">274</span> DH</div>
+  <div class="price">
+    Total : <span id="total">274</span> DH
+  </div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
@@ -180,7 +175,7 @@
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="https://equilibrevitale.github.io/">
+  <a class="btn btn-secondary" href="index.html">
     Voir tous nos autres produits
   </a>
 
@@ -193,8 +188,8 @@ const unitPrice = 274;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -211,9 +206,14 @@ function sendWhatsApp(){
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
 
   const message =
     "Bonjour,%0A%0A" +
@@ -222,7 +222,7 @@ function sendWhatsApp(){
     "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
     "Nom : " + name + "%0A" +
     "Téléphone : " + phone + "%0A" +
-    "Adresse de livraison : " + address;
+    "Adresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
@@ -234,7 +234,6 @@ function googleTranslateElementInit(){
     'google_translate_element'
   );
 }
-
 function setLang(lang){
   const interval = setInterval(() => {
     const select = document.querySelector("select.goog-te-combo");
@@ -246,6 +245,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
