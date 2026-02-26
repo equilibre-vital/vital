@@ -7,7 +7,7 @@
 
   <style>
     body{
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
       margin:0;
       background:#f7f9fb;
       color:#222;
@@ -18,8 +18,8 @@
       background:#fff;
       padding:20px;
     }
-    h1{color:#2e7d32;}
-    h2{margin-top:30px;}
+    h1{color:#2e7d32}
+    h2{margin-top:30px}
 
     .badge{
       background:#e8f5e9;
@@ -45,7 +45,7 @@
       margin:15px 0;
     }
 
-    select,input,textarea{
+    input, textarea, select{
       width:100%;
       padding:10px;
       margin:6px 0 15px;
@@ -117,10 +117,11 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
+<!-- 🌍 Traduction -->
 <div id="translate-box">
-  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
-  <a href="#" onclick="setLang('en')">English</a>
+  🌍
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
 <div id="google_translate_element" style="display:none;"></div>
 
@@ -128,7 +129,7 @@
 
   <div class="badge">
     ✅ Produit original Forever<br>
-    🚚 Livraison partout au Maroc – 💵 Paiement à la livraison
+    🚚 Livraison partout au Maroc – Paiement à la livraison
   </div>
 
   <h1>Propolis Crème</h1>
@@ -164,7 +165,9 @@
     <option value="5">5 tubes</option>
   </select>
 
-  <div class="price">Total : <span id="total">322</span> DH</div>
+  <div class="price">
+    Total : <span id="total">322</span> DH
+  </div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
@@ -189,8 +192,8 @@ const unitPrice = 322;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -206,27 +209,52 @@ function sendWhatsApp(){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
+
   const message =
-    "Bonjour,%0A%0ACommande : Propolis Crème%0AQuantité : " +
-    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
+    "Bonjour,%0A%0A" +
+    "Commande : Propolis Crème%0A" +
+    "Quantité : " + cartQty + " tube(s)%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
+
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
-/* Google Translate */
+/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
-    {pageLanguage:'fr', autoDisplay:false},
+    { pageLanguage:'fr', autoDisplay:false },
     'google_translate_element'
   );
 }
+
 function setLang(lang){
-  const select = document.querySelector("select.goog-te-combo");
-  if(select){
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
