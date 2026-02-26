@@ -88,7 +88,6 @@
       margin-top:30px;
     }
 
-    /* Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,12 +110,12 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
   <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -143,13 +142,6 @@
 
   <div class="price">Prix unitaire : 296 DH</div>
 
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Prendre <strong>2 à 4 comprimés par jour</strong>,
-    de préférence au cours des repas,
-    avec un verre d’eau.
-  </p>
-
   <h2>Commande</h2>
 
   <label>Quantité</label>
@@ -175,9 +167,7 @@
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
 
   <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
@@ -188,8 +178,8 @@ const unitPrice = 296;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -207,32 +197,34 @@ function sendWhatsApp(){
     return;
   }
 
-  const nameField = document.getElementById("name");
-  const phoneField = document.getElementById("phone");
-  const addressField = document.getElementById("address");
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
 
-  const name = nameField.value.trim();
-  const phone = phoneField.value.trim();
-  const address = addressField.value.trim();
-
-  if(name === "" || phone === "" || address === ""){
+  if(!name || !phone || !address){
     alert("Merci de remplir le nom, le téléphone et l’adresse.");
     return;
   }
 
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Garlic-Thym (Ail & Thym)%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+`Bonjour,
 
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+Commande : Garlic-Thym (Ail & Thym)
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodedMessage,
+    "_blank"
+  );
 }
 
-/* Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
