@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,122 +7,115 @@
   <title>Gel d'Aloe Vera – Forever</title>
 
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fb;
-      color: #222;
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+    }
+    h1{color:#2e7d32;}
+    h2{margin-top:30px;}
+
+    .badge{
+      background:#e8f5e9;
+      color:#2e7d32;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
     }
 
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: #ffffff;
-      padding: 20px;
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
     }
 
-    h1 { color: #2e7d32; }
-    h2 { margin-top: 30px; }
-
-    .badge {
-      background: #e8f5e9;
-      color: #2e7d32;
-      padding: 10px;
-      border-radius: 6px;
-      margin-bottom: 15px;
-      font-size: 15px;
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
     }
 
-    .product-img {
-      width: 100%;
-      max-width: 320px;
-      display: block;
-      margin: 20px auto;
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
     }
 
-    .price {
-      font-size: 22px;
-      font-weight: bold;
-      color: #d32f2f;
-      margin: 15px 0;
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
     }
 
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0 15px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+    .btn-secondary{
+      background:#1976d2;
+      font-size:15px;
     }
 
-    .btn {
-      display: block;
-      text-align: center;
-      background: #25d366;
-      color: white;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 15px 0;
-      border: none;
-      cursor: pointer;
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
     }
 
-    .btn-secondary {
-      background: #1976d2;
-      font-size: 15px;
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
     }
 
-    .cart {
-      background: #f1f1f1;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
+    /* 🌍 Traduction */
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
     }
-
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #777;
-      margin-top: 30px;
-    }
-
-    /* ===== BOUTON TRADUCTION ===== */
-    #translate-box {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      background: #2e7d32;
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 13px;
-      z-index: 9999;
-    }
-
-    #translate-box a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 4px;
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- Bouton traduction -->
+<!-- Traduction -->
 <div id="translate-box">
   🌍
-  <a href="#" onclick="setLang('ar')">العربية</a> |
-  <a href="#" onclick="setLang('en')">English</a>
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
-
-<!-- Google Translate invisible -->
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -136,17 +130,15 @@
 
   <img src="https://i.postimg.cc/QxNqDrMp/Screenshot-20260219-153505-Google.jpg"
        class="product-img"
-       alt="Gel d'Aloe Vera Forever">
+       alt="Gel d'Aloe Vera">
 
   <h2>Pourquoi choisir le Gel d'Aloe Vera ?</h2>
   <ul>
-    <li>✔️ Soutient la digestion et le confort intestinal</li>
+    <li>✔️ Soutient la digestion</li>
     <li>✔️ Aide à l’hydratation interne</li>
-    <li>✔️ Favorise l’assimilation des nutriments</li>
-    <li>✔️ Utilisation quotidienne simple</li>
+    <li>✔️ Favorise l’assimilation</li>
+    <li>✔️ Utilisation quotidienne</li>
   </ul>
-
-  <p>🌿 Convient aux <strong>adultes et jeunes adultes</strong></p>
 
   <div class="price">Prix unitaire : 425 DH</div>
 
@@ -171,13 +163,13 @@
 
   <h2>Informations de livraison</h2>
 
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
-  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom" required>
+  <input type="tel" id="phone" placeholder="Téléphone" required>
+  <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="https://nasr4280.github.io/vital/">
+  <a class="btn btn-secondary" href="index.html">
     Voir tous nos autres produits
   </a>
 
@@ -191,12 +183,12 @@
 const unitPrice = 425;
 let cartQty = 0;
 
-function updateTotal() {
+function updateTotal(){
   const qty = document.getElementById("qty").value;
   document.getElementById("total").innerText = qty * unitPrice;
 }
 
-function addToCart() {
+function addToCart(){
   cartQty = document.getElementById("qty").value;
   document.getElementById("cart").innerHTML =
     "<strong>Gel d'Aloe Vera</strong><br>" +
@@ -204,37 +196,57 @@ function addToCart() {
     "Total : " + (cartQty * unitPrice) + " DH";
 }
 
-function sendWhatsApp() {
-  if (cartQty === 0) {
+function sendWhatsApp(){
+  if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
 
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
+
   const message =
-    "Bonjour,%0A%0ACommande : Gel d'Aloe Vera%0AQuantité : " +
-    cartQty + "%0ATotal : " + (cartQty * unitPrice) + " DH";
+    "Bonjour,%0A%0A" +
+    "Commande : Gel d'Aloe Vera%0A" +
+    "Quantité : " + cartQty + "%0A" +
+    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
+    "Nom : " + name + "%0A" +
+    "Téléphone : " + phone + "%0A" +
+    "Adresse : " + address;
 
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
-</script>
 
-<script>
-function googleTranslateElementInit() {
+/* 🌍 Google Translate */
+function googleTranslateElementInit(){
   new google.translate.TranslateElement(
-    { pageLanguage: 'fr', autoDisplay: false },
+    { pageLanguage:'fr', autoDisplay:false },
     'google_translate_element'
   );
 }
 
-function setLang(lang) {
-  const select = document.querySelector("select.goog-te-combo");
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
 }
 </script>
 
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
 
