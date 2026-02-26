@@ -63,15 +63,15 @@
       border-radius:8px;
       font-size:18px;
       font-weight:bold;
-      text-decoration:none;
-      margin:15px 0;
       border:none;
       cursor:pointer;
+      margin:15px 0;
     }
 
     .btn-secondary{
       background:#1976d2;
       font-size:15px;
+      text-decoration:none;
     }
 
     .cart{
@@ -101,8 +101,8 @@
     }
     #translate-box a{
       color:#fff;
-      text-decoration:none;
       font-weight:bold;
+      text-decoration:none;
       margin:0 4px;
     }
   </style>
@@ -111,9 +111,8 @@
 <body>
 
 <div id="translate-box">
-  🌍
-  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
-  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+  🌍 <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
 </div>
 
 <div id="google_translate_element" style="display:none;"></div>
@@ -128,9 +127,7 @@
   <h1>Garlic-Thym</h1>
   <p><strong>Complément alimentaire à base d’ail et de thym pour soutenir les défenses naturelles et le bien-être respiratoire.</strong></p>
 
-  <img src="https://i.postimg.cc/bwdn2bw3/Screenshot-20260225-191953-Google.jpg"
-       alt="Garlic Thym Forever"
-       class="product-img">
+  <img src="https://i.postimg.cc/bwdn2bw3/Screenshot-20260225-191953-Google.jpg" class="product-img">
 
   <h2>Pourquoi choisir Garlic-Thym ?</h2>
   <ul>
@@ -142,16 +139,8 @@
 
   <div class="price">Prix unitaire : 296 DH</div>
 
-  <h2>Conseils d’utilisation</h2>
-  <p>
-    Prendre <strong>2 à 4 comprimés par jour</strong>,
-    de préférence au cours des repas,
-    avec un verre d’eau.
-  </p>
-
   <h2>Commande</h2>
 
-  <label>Quantité</label>
   <select id="qty" onchange="updateTotal()">
     <option value="1">1 boîte</option>
     <option value="2">2 boîtes</option>
@@ -167,198 +156,65 @@
   <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
-
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
+  <input id="name" placeholder="Nom et prénom">
+  <input id="phone" placeholder="Téléphone / WhatsApp">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
-
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos produits</a>
 
   <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
+
+<section style="max-width:700px;margin:30px auto;padding:20px;background:#fff;line-height:1.7">
+  <h2>🌿 COMPLÉMENT AIL & THYM FOREVER</h2>
+  <p>Association traditionnelle reconnue pour soutenir les défenses naturelles, le confort digestif et la circulation.</p>
+  <ul>
+    <li>Améliore la circulation sanguine</li>
+    <li>Soutient le cœur</li>
+    <li>Réduit la fatigue passagère</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+</section>
 
 <script>
 const unitPrice = 296;
 let cartQty = 0;
 
 function updateTotal(){
-  document.getElementById("total").innerText =
-    document.getElementById("qty").value * unitPrice;
+  total.innerText = qty.value * unitPrice;
 }
 
 function addToCart(){
-  cartQty = document.getElementById("qty").value;
-  document.getElementById("cart").innerHTML =
-    "<strong>Garlic-Thym</strong><br>" +
-    "Quantité : " + cartQty + " boîte(s)<br>" +
-    "Total : " + (cartQty * unitPrice) + " DH";
+  cartQty = qty.value;
+  cart.innerHTML = "<strong>Garlic-Thym</strong><br>Quantité : "+cartQty+"<br>Total : "+(cartQty*unitPrice)+" DH";
 }
 
 function sendWhatsApp(){
-  if(cartQty === 0){
-    alert("Veuillez ajouter le produit au panier.");
-    return;
-  }
-
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
-
-  if(!name || !phone || !address){
-    alert("Merci de remplir le nom, le téléphone et l’adresse.");
-    return;
-  }
-
-  const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Garlic-Thym (Ail & Thym)%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
-
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+  if(!cartQty) return alert("Ajoutez le produit.");
+  if(!name.value||!phone.value||!address.value) return alert("Champs manquants.");
+  const msg =
+    "Commande Garlic-Thym%0AQuantité : "+cartQty+
+    "%0ATotal : "+(cartQty*unitPrice)+" DH%0A%0A"+
+    "Nom : "+name.value+
+    "%0ATéléphone : "+phone.value+
+    "%0AAdresse : "+address.value;
+  window.open("https://wa.me/212752789277?text="+msg);
 }
 
 function googleTranslateElementInit(){
-  new google.translate.TranslateElement(
-    { pageLanguage:'fr', autoDisplay:false },
-    'google_translate_element'
-  );
+  new google.translate.TranslateElement({pageLanguage:'fr'}, 'google_translate_element');
 }
-
-function setLang(lang){
-  const interval = setInterval(() => {
-    const select = document.querySelector("select.goog-te-combo");
-    if(select){
-      select.value = lang;
-      select.dispatchEvent(new Event("change"));
-      clearInterval(interval);
-    }
-  }, 300);
+function setLang(l){
+  const i=setInterval(()=>{
+    const s=document.querySelector(".goog-te-combo");
+    if(s){s.value=l;s.dispatchEvent(new Event("change"));clearInterval(i);}
+  },300);
 }
 </script>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-</body>
-</html>
-
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-</body>
-</html>
-
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<hr>
-
-<section id="ail-thym-forever" style="padding:20px; line-height:1.7; font-size:15px;">
-
-  <h2>🌿 COMPLÉMENT AIL ET THYM FOREVER</h2>
-
-  <h3>Confort digestif et bien-être général</h3>
-
-  <p>
-    Le complément Ail et Thym Forever associe
-    deux plantes reconnues depuis l’Antiquité
-    pour leurs bienfaits sur la santé.
-    L’ail est naturellement riche
-    en composés soufrés, notamment l’allicine,
-    connue pour ses propriétés bénéfiques.
-  </p>
-
-  <p>
-    L’ail est traditionnellement utilisé
-    pour soutenir le confort digestif,
-    la circulation sanguine
-    et le bon fonctionnement du cœur.
-    Il est également reconnu
-    pour contribuer au bien-être général
-    et au soutien du système immunitaire.
-  </p>
-
-  <p>
-    Le thym contient des principes actifs
-    tels que les flavonoïdes,
-    reconnus pour leur effet relaxant.
-    Sa tige, ses feuilles
-    et son huile essentielle
-    possèdent des propriétés antiseptiques,
-    anti-infectieuses
-    et antispasmodiques.
-  </p>
-
-  <p>
-    La combinaison de l’ail et du thym
-    est appréciée pour améliorer
-    le confort digestif
-    et soutenir les défenses naturelles.
-  </p>
-
-  <p>
-    Une capsule d’ail sans odeur
-    est équivalente à
-    <strong>1000 mg d’ail frais</strong>.
-    L’ail associé à l’huile de colza
-    contribue positivement
-    à la circulation sanguine
-    et au bon fonctionnement du cœur.
-  </p>
-
-  <h3>🧴 Composition du produit</h3>
-
-  <p><strong>Contenance :</strong> 100 capsules</p>
-
-  <p>
-    Huile de colza,
-    gélatine,
-    poudre de feuille de thym
-    (<em>Thymus vulgaris</em>),
-    humectant : glycérol,
-    eau,
-    extrait de bulbe d’ail
-    (<em>Allium sativum</em>),
-    émulsifiant : lécithines de soja,
-    épaississant : cire d’abeille blanche et jaune,
-    extrait de fruit de caroubier
-    (<em>Ceratonia siliqua</em>).
-  </p>
-
-  <p>
-    Cette liste d’ingrédients
-    peut faire l’objet de modifications.
-    Veuillez consulter
-    l’emballage du produit acheté.
-  </p>
-
-  <h3>🧴 Conseils d’utilisation</h3>
-
-  <p>
-    Une capsule d’ail et thym sans odeur
-    est équivalente à 1000 mg d’ail frais.
-    De préférence pendant les repas,
-    prendre <strong>1 capsule à chacun
-    des trois repas</strong>.
-  </p>
-
-  <h3>✨ Bienfaits du complément Ail et Thym</h3>
-
-  <ul>
-    <li>Stimule le bien-être et soulage la fatigue passagère.</li>
-    <li>Améliore la circulation sanguine.</li>
-    <li>Contribue à réduire la tension artérielle.</li>
-    <li>Dynamise les défenses naturelles et soulage les allergies.</li>
-    <li>Contribue à la réduction du taux de cholestérol.</li>
-    <li>Participe à l’action désinfectante des intestins et des voies urinaires.</li>
-    <li><strong>Sans gluten</strong></li>
-  </ul>
-
-</section>
 </body>
 </html>
