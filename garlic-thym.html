@@ -88,7 +88,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,12 +110,12 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
   <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -161,9 +160,7 @@
     <option value="5">5 boîtes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">296</span> DH
-  </div>
+  <div class="price">Total : <span id="total">296</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
@@ -229,7 +226,6 @@ function sendWhatsApp(){
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
-/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -248,6 +244,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
