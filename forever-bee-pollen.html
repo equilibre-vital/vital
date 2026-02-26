@@ -94,7 +94,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -117,7 +116,6 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
@@ -135,11 +133,9 @@
   <h1>Forever Bee Pollen</h1>
   <p><strong>Des nutriments naturels pour soutenir l’énergie et la vitalité au quotidien.</strong></p>
 
-  <img
-    src="https://i.postimg.cc/0yrMV1pG/Screenshot-20260221-232329-Google.jpg"
-    alt="Forever Bee Pollen"
-    class="product-img"
-  />
+  <img src="https://i.postimg.cc/0yrMV1pG/Screenshot-20260221-232329-Google.jpg"
+       alt="Forever Bee Pollen"
+       class="product-img"/>
 
   <h2>Pourquoi choisir Forever Bee Pollen ?</h2>
   <ul>
@@ -170,23 +166,22 @@
 
   <h2>Informations de livraison</h2>
 
-  <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
-  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+  <input type="text" id="name" placeholder="Nom et prénom" required>
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp" required>
+  <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="https://equilibrevital.github.io/">
+  <a class="btn btn-secondary" href="index.html">
     Voir tous nos autres produits
   </a>
 
   <hr>
 
-  <h3>Informations complémentaires</h3>
   <p class="small">
-    <strong>Forever Bee Pollen</strong> est un complément alimentaire issu du pollen d’abeille,
-    reconnu pour sa richesse naturelle en nutriments.
-    Il aide à soutenir l’énergie, la vitalité et le bien-être général.
+    <strong>Forever Bee Pollen</strong> est un complément alimentaire naturel
+    issu du pollen d’abeille, reconnu pour soutenir l’énergie,
+    la vitalité et le bien-être général.
   </p>
 
   <footer>© Équilibre Vitale – Tous droits réservés</footer>
@@ -216,9 +211,14 @@ function sendWhatsApp(){
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
 
   const message =
     "Bonjour,%0A%0A" +
@@ -232,7 +232,6 @@ function sendWhatsApp(){
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 
-/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -251,6 +250,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
