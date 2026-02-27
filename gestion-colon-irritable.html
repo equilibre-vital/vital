@@ -21,7 +21,6 @@
     }
     h1 { color: #2e7d32; }
     h2 { margin-top: 35px; }
-    ul { margin-left: 20px; }
 
     .intro {
       background: #f1f6f3;
@@ -39,29 +38,12 @@
       line-height: 1.7;
     }
 
-    .product a {
-      color: #1a73e8;
-      text-decoration: underline;
-      font-weight: 600;
-    }
-
     .prices-box {
       background: #fafafa;
       padding: 22px 20px;
       border-radius: 10px;
       margin: 20px auto 30px;
       max-width: 520px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-    }
-
-    .prices-box ul {
-      padding-left: 20px;
-      margin: 0;
-    }
-
-    .prices-box li {
-      margin-bottom: 8px;
-      font-size: 16px;
     }
 
     .total-price {
@@ -131,14 +113,6 @@
       margin-top: 12px;
     }
 
-    .note {
-      font-size: 13px;
-      color: #555;
-      margin-top: 20px;
-      line-height: 1.6;
-    }
-
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -161,12 +135,12 @@
 
 <body>
 
-<!-- 🌍 Bouton traduction -->
 <div id="translate-box">
   🌍
-  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
-  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+  <a href="#" onclick="setLang('ar')">العربية</a> |
+  <a href="#" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -174,88 +148,84 @@
 <h1>Protocole d’accompagnement – Côlon irritable</h1>
 
 <div class="intro">
-  Le côlon irritable peut se manifester par des ballonnements,
-  un inconfort digestif, des troubles du transit ou une sensibilité intestinale.<br><br>
-
-  Ce protocole propose une <strong>approche naturelle d’accompagnement</strong>,
-  visant à soutenir le confort digestif,
-  l’équilibre de la flore intestinale
-  et l’apaisement du système digestif,
-  dans le cadre d’une hygiène de vie adaptée.
+  Approche naturelle d’accompagnement visant à soutenir
+  le confort digestif, l’équilibre intestinal
+  et l’apaisement du système digestif.
 </div>
 
-<h2>Produits inclus dans le protocole</h2>
-<ul class="product">
-  <li>🔵 <a href="aloe-vera.html">Gel d’Aloe Vera</a></li>
-  <li>🔵 <a href="pro-b.html">Pro-B</a></li>
+<h2>Produits inclus</h2>
+<ul>
+  <li>🔵 Gel d’Aloe Vera</li>
+  <li>🔵 Pro-B</li>
 </ul>
-
-<h2>💚 Bienfaits des produits</h2>
-<div class="benefits">
-
-  <p><strong>🔹 Gel d’Aloe Vera</strong><br>
-  Connu pour ses propriétés apaisantes,
-  le Gel d’Aloe Vera aide à soutenir le confort digestif,
-  à apaiser la muqueuse intestinale
-  et à favoriser un environnement intestinal équilibré.</p>
-
-  <p><strong>🔹 Pro-B</strong><br>
-  Pro-B est formulé pour soutenir l’équilibre de la flore intestinale
-  et accompagner le bon fonctionnement digestif.</p>
-
-</div>
-
-<h2>Mode d’utilisation</h2>
-<p>
-  👉 <strong>Le mode d’utilisation détaillé est communiqué au moment de la livraison</strong>.
-</p>
 
 <h2>Prix du protocole</h2>
 <div class="prices-box">
   <ul>
-    <li>1 bouteille de Gel d’Aloe Vera : <strong>425 DH</strong></li>
-    <li>1 boîte Pro-B : <strong>483 DH</strong></li>
+    <li>Gel d’Aloe Vera : <strong>425 DH</strong></li>
+    <li>Pro-B : <strong>483 DH</strong></li>
   </ul>
-
-  <div class="total-price">Total du protocole : 908 DH</div>
+  <div class="total-price">Total : 908 DH</div>
 </div>
 
 <div class="important">
-  <strong>⚠️ Information importante</strong><br><br>
-  Ce protocole est une approche d’accompagnement naturel
-  et ne remplace pas un avis médical.
+  ⚠️ Ce protocole ne remplace pas un avis médical.
 </div>
 
 <h2>Commander le protocole</h2>
 
 <input type="text" id="name" placeholder="Nom et prénom">
-<input type="tel" id="phone" placeholder="Téléphone">
+<input type="tel" id="phone" placeholder="Téléphone / WhatsApp">
 <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
 <a class="cta" href="#" onclick="sendWhatsApp()">📲 Commander via WhatsApp</a>
 <a class="cta-secondary" href="#" onclick="sendAccompagnement()">🤝 Demander un accompagnement personnalisé</a>
 <a class="cta-tertiary" href="index.html">🔙 Voir nos autres produits</a>
 
-<p class="note">
-  Notre équipe vous accompagne avant, pendant et après la mise en place du protocole.
-</p>
-
 </div>
 
 <script>
-function sendWhatsApp() {
+function sendWhatsApp(){
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
+
   const message =
-    "Bonjour,%0A%0ACommande : Protocole Côlon irritable%0ATotal : 908 DH";
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+`Bonjour,
+
+Commande : Protocole Côlon irritable
+Total : 908 DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodeURIComponent(message),
+    "_blank"
+  );
 }
 
-function sendAccompagnement() {
+function sendAccompagnement(){
   const message =
-    "Bonjour,%0A%0AJe souhaite un accompagnement personnalisé pour le protocole Côlon irritable.";
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+`Bonjour,
+
+Je souhaite un accompagnement personnalisé
+pour le protocole Côlon irritable.`;
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodeURIComponent(message),
+    "_blank"
+  );
 }
 
-/* 🌍 Google Translate */
+/* Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
