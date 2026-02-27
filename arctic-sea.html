@@ -63,7 +63,6 @@
       border-radius:8px;
       font-size:18px;
       font-weight:bold;
-      text-decoration:none;
       margin:15px 0;
       border:none;
       cursor:pointer;
@@ -88,7 +87,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,12 +109,12 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍 
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
   <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -127,25 +125,10 @@
   </div>
 
   <h1>Forever Arctic-Sea (120 capsules)</h1>
-  <p><strong>Complément alimentaire riche en oméga-3 et oméga-9 pour soutenir la santé du cœur et du cerveau.</strong></p>
 
   <img src="https://i.postimg.cc/vBNPn9R7/Screenshot-20260225-211220-Google.jpg"
        class="product-img"
        alt="Forever Arctic-Sea">
-
-  <h2>Pourquoi choisir Forever Arctic-Sea ?</h2>
-  <ul>
-    <li>✔️ Apport optimal en oméga-3 (EPA & DHA)</li>
-    <li>✔️ Soutient la santé du cœur et du cerveau</li>
-    <li>✔️ Contribue à l’équilibre du cholestérol</li>
-    <li>✔️ Favorise le bien-être général au quotidien</li>
-  </ul>
-
-  <p>
-    <strong>Forever Arctic-Sea</strong> associe des huiles de poissons et d’olive
-    soigneusement sélectionnées afin d’apporter des acides gras essentiels,
-    indispensables au bon fonctionnement de l’organisme.
-  </p>
 
   <div class="price">Prix unitaire : 516 DH</div>
 
@@ -160,94 +143,33 @@
     <option value="5">5 boîtes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">516</span> DH
-  </div>
+  <div class="price">Total : <span id="total">516</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
   <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
-
-<hr>
-
-<section style="padding:20px; line-height:1.7; font-size:15px; max-width:700px; margin:auto; background:#fff;">
-
-  <h2>🐟 FOREVER ARCTIC-SEA</h2>
-  <h3>Le bon gras essentiel pour le cœur et le cerveau</h3>
-
-  <p>
-    Forever Arctic-Sea est formulé à partir d’huiles marines de qualité
-    (saumon, sardine, cabillaud, calamar)
-    associées à de l’huile d’olive extra vierge.
-    Il apporte des acides gras insaturés essentiels
-    que l’organisme ne peut pas produire seul.
-  </p>
-
-  <p>
-    Les oméga-3 (EPA et DHA) contribuent au fonctionnement normal
-    du cœur, du cerveau et de la vision,
-    tandis que les oméga-9 participent
-    à l’équilibre lipidique et au bien-être général.
-  </p>
-
-  <h3>🧴 Composition</h3>
-  <p><strong>Contenance :</strong> 120 capsules</p>
-
-  <p>
-    Huiles de poissons, huile de calamar,
-    huile d’olive extra vierge,
-    gélatine de poisson,
-    glycérol, eau purifiée,
-    arômes naturels citron et citron vert,
-    antioxydants naturels.
-    <br><strong>Contient du poisson.</strong>
-  </p>
-
-  <h3>🧴 Conseils d’utilisation</h3>
-  <p>
-    Prendre <strong>2 capsules, 3 fois par jour</strong>,
-    de préférence au cours des repas,
-    avec un verre d’eau.
-  </p>
-
-  <h3>✨ Bienfaits</h3>
-  <ul>
-    <li>Soutient la santé cardiovasculaire</li>
-    <li>Contribue au bon fonctionnement du cerveau</li>
-    <li>Aide à maintenir un taux de cholestérol normal</li>
-    <li>Favorise la vitalité et le bien-être général</li>
-    <li><strong>Sans gluten</strong></li>
-  </ul>
-
-</section>
 
 <script>
 const unitPrice = 516;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -259,28 +181,40 @@ function addToCart(){
 }
 
 function sendWhatsApp(){
+
   if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
 
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Forever Arctic-Sea%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+`Bonjour,
 
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+Commande : Forever Arctic-Sea
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodedMessage,
+    "_blank"
+  );
 }
 
-/* 🌍 Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -299,6 +233,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
