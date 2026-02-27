@@ -157,7 +157,6 @@
       line-height:1.6;
     }
 
-    /* ===== Bouton traduction ===== */
     .translate-box{
       position:fixed;
       top:10px;
@@ -174,7 +173,6 @@
 
 <body>
 
-<!-- Bouton traduction Google -->
 <div class="translate-box">
   <div id="google_translate_element"></div>
 </div>
@@ -206,38 +204,6 @@
   <p><strong>Vitolize Femme</strong> : accompagne l’équilibre hormonal féminin.</p>
 </div>
 
-<h2>Pourquoi nos clientes nous font confiance</h2>
-<div class="testimonial">
-  “Une approche respectueuse et naturelle. J’ai apprécié le suivi et la discrétion.”
-  <br><strong>— Cliente, Rabat</strong>
-</div>
-
-<h2>Prix du protocole</h2>
-<div class="prices-box">
-  <ul>
-    <li>Moisturizer : <strong>242 DH</strong></li>
-    <li>Berry Nectar : <strong>425 DH</strong></li>
-    <li>Vitolize Femme : <strong>418 DH</strong></li>
-  </ul>
-  <div class="total-price">Total : 1085 DH</div>
-</div>
-
-<div class="important">
-  ⚠️ Approche naturelle – ce protocole ne constitue pas un traitement médical.
-</div>
-
-<h2>Questions fréquentes</h2>
-
-<div class="faq-item">
-  <h3>Les résultats sont-ils garantis ?</h3>
-  <p>Chaque organisme est différent. Ce protocole vise un accompagnement naturel et progressif.</p>
-</div>
-
-<div class="faq-item">
-  <h3>La livraison est-elle discrète ?</h3>
-  <p>Oui, emballage neutre et confidentialité totale.</p>
-</div>
-
 <h2>Commander le protocole</h2>
 
 <input type="text" id="name" placeholder="Nom et prénom" required>
@@ -246,7 +212,6 @@
 
 <a class="cta" onclick="sendWhatsApp()">🔒 Commander via WhatsApp (confidentiel)</a>
 <a class="cta-secondary" onclick="sendAccompagnement()">💬 Je souhaite un accompagnement</a>
-<a class="cta-tertiary" href="index.html">🔙 Voir nos autres protocoles</a>
 
 <p class="note">
   📌 Les conseils d’utilisation détaillés seront communiqués lors de la livraison, avec accompagnement personnalisé.<br><br>
@@ -268,7 +233,7 @@ function sendWhatsApp(){
 
   const message =
     "Bonjour,%0A%0A" +
-    "Commande : Protocole Poitrine & Fessiers%0A" +
+    "Commande : Protocole Poitrine %26 Fessiers%0A" +
     "Total : 1085 DH%0A%0A" +
     "Nom : " + name + "%0A" +
     "Téléphone : " + phone + "%0A" +
@@ -279,12 +244,11 @@ function sendWhatsApp(){
 
 function sendAccompagnement(){
   const message =
-    "Bonjour,%0A%0AJe souhaite un accompagnement pour le protocole Poitrine & Fessiers.";
+    "Bonjour,%0A%0AJe souhaite un accompagnement pour le protocole Poitrine %26 Fessiers.";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 </script>
 
-<!-- Google Translate -->
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
