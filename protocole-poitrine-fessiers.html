@@ -18,15 +18,35 @@
       margin:0;
       color:#222;
     }
+
+    /* ===== LANGUAGE BUTTON ===== */
+    .lang-pill{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#2e7d32;
+      color:#fff;
+      padding:6px 14px;
+      border-radius:20px;
+      font-size:14px;
+      font-weight:bold;
+      cursor:pointer;
+      z-index:9999;
+      box-shadow:0 2px 6px rgba(0,0,0,.2);
+    }
+    .lang-pill span{
+      opacity:.9;
+    }
+
     .container{
       max-width:850px;
       margin:auto;
       background:#fff;
       padding:20px;
     }
+
     h1{color:#ad1457;}
     h2{margin-top:30px;}
-    ul{margin-left:20px;}
 
     .intro{
       background:#fce4ec;
@@ -36,78 +56,20 @@
       margin-bottom:25px;
     }
 
-    .benefits{
-      background:#f9f9f9;
-      padding:20px;
-      border-radius:8px;
-      margin-bottom:30px;
-      line-height:1.7;
-    }
-
-    .testimonial{
-      background:#f4f0f4;
-      border-left:4px solid #8e24aa;
-      padding:16px;
-      margin-top:20px;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .product a{
-      color:#1a73e8;
-      text-decoration:underline;
-      font-weight:600;
-    }
-
     .prices-box{
       background:#fafafa;
-      padding:22px 20px;
+      padding:22px;
       border-radius:10px;
-      margin:20px auto 30px;
+      margin:20px auto;
       max-width:520px;
-      box-shadow:0 2px 6px rgba(0,0,0,.04);
     }
 
     .total-price{
-      margin-top:15px;
-      padding-top:12px;
-      border-top:1px solid #ddd;
       text-align:center;
       font-size:22px;
       font-weight:bold;
       color:#d32f2f;
-    }
-
-    .important{
-      background:#fff6f6;
-      border-left:4px solid #d32f2f;
-      padding:18px;
-      margin-top:30px;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .faq-item{
-      background:#fafafa;
-      border-radius:8px;
-      padding:16px;
-      margin-bottom:15px;
-      box-shadow:0 1px 4px rgba(0,0,0,.04);
-    }
-
-    .faq-item h3{
-      margin:0 0 8px;
-      font-size:16px;
-      color:#ad1457;
-    }
-
-    input, textarea{
-      width:100%;
-      padding:10px;
-      margin:8px 0 15px;
-      border-radius:6px;
-      border:1px solid #ccc;
-      font-size:15px;
+      margin-top:10px;
     }
 
     .cta{
@@ -121,7 +83,6 @@
       font-weight:bold;
       text-decoration:none;
       margin-top:20px;
-      cursor:pointer;
     }
 
     .cta-secondary{
@@ -136,139 +97,78 @@
       text-decoration:none;
       margin-top:12px;
     }
-
-    .cta-tertiary{
-      display:block;
-      background:#455a64;
-      color:#fff;
-      text-align:center;
-      padding:13px;
-      border-radius:8px;
-      font-size:15px;
-      font-weight:bold;
-      text-decoration:none;
-      margin-top:12px;
-    }
-
-    .note{
-      font-size:13px;
-      color:#555;
-      margin-top:20px;
-      line-height:1.6;
-    }
   </style>
 </head>
 
 <body>
 
+<!-- 🌍 LANGUAGE PILL -->
+<div class="lang-pill" onclick="toggleLang()">
+  🌍 <span id="langText">العربية | English</span>
+</div>
+
 <div class="container">
 
-<h1>Protocole naturel pour le galbe de la poitrine et des fessiers</h1>
-<h2>Approche nutritionnelle douce avec accompagnement personnalisé</h2>
+<h1 id="title">Protocole naturel pour le galbe de la poitrine et des fessiers</h1>
+<h2 id="subtitle">Approche nutritionnelle douce avec accompagnement personnalisé</h2>
 
-<div class="intro">
+<div class="intro" id="intro">
   Ce protocole s’adresse aux femmes souhaitant améliorer l’harmonie de leur silhouette
   grâce à une <strong>approche naturelle et progressive</strong>.<br><br>
-  L’objectif est de soutenir le bien-être féminin, l’équilibre nutritionnel
-  et la mise en valeur naturelle de la silhouette, avec un accompagnement sérieux et discret.
+  L’objectif est de soutenir le bien-être féminin et l’équilibre nutritionnel,
+  avec un accompagnement sérieux et discret.
 </div>
 
-<h2>Produits inclus dans le protocole</h2>
-<ul class="product">
-  <li>🔸 <a href="#">Gel Aloe Vera à boire</a></li>
-  <li>🔸 <a href="#">Berry Nectar</a></li>
-  <li>🔸 <a href="#">Vitollize Femme</a></li>
-</ul>
-
-<h2>💖 Bienfaits recherchés</h2>
-<div class="benefits">
-  <p>✔ Soutien de l’équilibre nutritionnel féminin</p>
-  <p>✔ Contribution à la tonicité et à l’harmonie de la silhouette</p>
-  <p>✔ Accompagnement du bien-être général</p>
-</div>
-
-<h2>Pourquoi nos clientes nous font confiance</h2>
-<div class="testimonial">
-  “Accompagnement sérieux, conseils clairs et beaucoup de respect.
-  Je me suis sentie suivie et écoutée.”
-  <br><strong>— Cliente, Rabat</strong>
-</div>
-
-<h2>Prix du protocole</h2>
+<h2 id="priceTitle">Prix du protocole</h2>
 <div class="prices-box">
-  <ul>
+  <ul id="prices">
     <li>Gel Aloe Vera : <strong>425 DH</strong></li>
     <li>Berry Nectar : <strong>425 DH</strong></li>
     <li>Vitollize Femme : <strong>418 DH</strong></li>
   </ul>
-  <div class="total-price">Total : 1 085 DH</div>
+  <div class="total-price" id="total">Total : 1 085 DH</div>
 </div>
 
-<div class="important">
-  ⚠️ Approche naturelle – ce protocole ne constitue pas un traitement médical
-  et ne remplace pas un avis professionnel de santé.
-</div>
-
-<h2>Questions fréquentes</h2>
-
-<div class="faq-item">
-  <h3>Ce protocole est-il adapté à toutes les femmes ?</h3>
-  <p>Il s’adresse aux femmes adultes souhaitant une approche naturelle du bien-être et de la silhouette.</p>
-</div>
-
-<div class="faq-item">
-  <h3>Quand peut-on observer des changements ?</h3>
-  <p>Les ressentis varient selon les personnes. L’accompagnement est progressif et personnalisé.</p>
-</div>
-
-<div class="faq-item">
-  <h3>Les échanges sont-ils confidentiels ?</h3>
-  <p>Oui. La confidentialité et le respect sont au cœur de notre accompagnement.</p>
-</div>
-
-<h2>Commander le protocole</h2>
-
-<input type="text" id="name" placeholder="Nom et prénom" required>
-<input type="tel" id="phone" placeholder="Téléphone" required>
-<textarea id="address" placeholder="Adresse de livraison" required></textarea>
-
-<a class="cta" onclick="sendWhatsApp()">🔒 Commander via WhatsApp (confidentiel)</a>
-<a class="cta-secondary" onclick="sendAccompagnement()">💬 Je souhaite un accompagnement</a>
-<a class="cta-tertiary" href="index.html">🔙 Voir nos autres protocoles</a>
-
-<p class="note">
-  Accompagnement personnalisé avant, pendant et après le protocole.
-  Livraison partout au Maroc.
-</p>
+<a class="cta">🔒 Commander via WhatsApp</a>
+<a class="cta-secondary">💬 Je souhaite un accompagnement</a>
 
 </div>
 
 <script>
-function sendWhatsApp(){
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
+let currentLang = "fr";
 
-  if(!name || !phone || !address){
-    alert("Merci de remplir tous les champs.");
+const translations = {
+  ar:{
+    title:"بروتوكول طبيعي لتناسق الصدر والأرداف",
+    subtitle:"مقاربة غذائية طبيعية مع مرافقة شخصية",
+    intro:"هذا البروتوكول مخصص للنساء اللواتي يرغبن في تحسين تناسق القوام بطريقة طبيعية وتدريجية.<br><br>الهدف هو دعم التوازن الغذائي والراحة العامة للمرأة مع مرافقة جادة وسرية.",
+    priceTitle:"سعر البروتوكول",
+    total:"المجموع : 1085 درهم"
+  },
+  en:{
+    title:"Natural protocol for breast and buttocks shaping",
+    subtitle:"Gentle nutritional approach with personalized support",
+    intro:"This protocol is designed for women who wish to enhance body harmony through a natural and progressive approach.<br><br>The goal is to support feminine well-being and nutritional balance with serious and discreet guidance.",
+    priceTitle:"Protocol price",
+    total:"Total: 1085 MAD"
+  }
+};
+
+function toggleLang(){
+  currentLang = currentLang === "fr" ? "ar" : currentLang === "ar" ? "en" : "fr";
+
+  if(currentLang === "fr"){
+    location.reload();
     return;
   }
 
-  const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Protocole Poitrine & Fessiers%0A" +
-    "Total : 1 085 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+  document.getElementById("title").innerHTML = translations[currentLang].title;
+  document.getElementById("subtitle").innerHTML = translations[currentLang].subtitle;
+  document.getElementById("intro").innerHTML = translations[currentLang].intro;
+  document.getElementById("priceTitle").innerHTML = translations[currentLang].priceTitle;
+  document.getElementById("total").innerHTML = translations[currentLang].total;
 
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
-}
-
-function sendAccompagnement(){
-  const message =
-    "Bonjour,%0A%0AJe souhaite un accompagnement pour le protocole Poitrine & Fessiers.";
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+  document.body.dir = currentLang === "ar" ? "rtl" : "ltr";
 }
 </script>
 
