@@ -44,6 +44,15 @@
       line-height:1.7;
     }
 
+    .testimonial{
+      background:#f4f8f6;
+      border-left:4px solid #388e3c;
+      padding:16px;
+      margin-top:20px;
+      font-size:14px;
+      line-height:1.6;
+    }
+
     .product a{
       color:#1a73e8;
       text-decoration:underline;
@@ -76,19 +85,6 @@
       margin-top:30px;
       font-size:14px;
       line-height:1.6;
-    }
-
-    .testimonial{
-      background:#f4f8f6;
-      border-left:4px solid #388e3c;
-      padding:16px;
-      margin-top:20px;
-      font-size:14px;
-      line-height:1.6;
-    }
-
-    .faq{
-      margin-top:30px;
     }
 
     .faq-item{
@@ -184,14 +180,13 @@
 
 <h2>💚 Bienfaits du protocole</h2>
 <div class="benefits">
-  <p><strong>Gel d’Aloe Vera</strong> : soutien digestif, amélioration du transit et du confort intestinal.</p>
-  <p><strong>Propolis Crème</strong> : apaisement, protection et confort local.</p>
+  <p><strong>Gel d’Aloe Vera</strong> : soutien digestif et confort intestinal.</p>
+  <p><strong>Propolis Crème</strong> : apaisement et protection locale.</p>
 </div>
 
-<h2>Ils nous ont fait confiance</h2>
+<h2>Pourquoi nos clients nous font confiance</h2>
 <div class="testimonial">
-  “Après plusieurs semaines d’inconfort, j’ai apprécié l’approche naturelle et surtout l’accompagnement discret.
-  Les conseils reçus m’ont beaucoup aidé.”  
+  “Approche sérieuse, discrète et rassurante. L’accompagnement m’a vraiment aidé.”
   <br><strong>— Client, Casablanca</strong>
 </div>
 
@@ -209,29 +204,15 @@
 </div>
 
 <h2>Questions fréquentes</h2>
-<div class="faq">
 
-  <div class="faq-item">
-    <h3>Ce protocole est-il adapté à tous ?</h3>
-    <p>Il s’adresse aux adultes recherchant une approche naturelle de confort.
-    En cas de pathologie ou de doute, un avis médical est recommandé.</p>
-  </div>
+<div class="faq-item">
+  <h3>La commande est-elle confidentielle ?</h3>
+  <p>Oui. Les échanges et la livraison sont réalisés de manière discrète.</p>
+</div>
 
-  <div class="faq-item">
-    <h3>Quand peut-on ressentir les premiers effets ?</h3>
-    <p>Les ressentis varient selon les personnes. L’objectif est un accompagnement progressif et durable.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>La commande est-elle confidentielle ?</h3>
-    <p>Oui. Les échanges, le suivi et la livraison sont réalisés de manière discrète et respectueuse.</p>
-  </div>
-
-  <div class="faq-item">
-    <h3>Livrez-vous partout au Maroc ?</h3>
-    <p>Oui, la livraison est assurée sur tout le territoire marocain.</p>
-  </div>
-
+<div class="faq-item">
+  <h3>Livrez-vous partout au Maroc ?</h3>
+  <p>Oui, livraison sur tout le territoire marocain.</p>
 </div>
 
 <h2>Commander le protocole</h2>
@@ -241,7 +222,7 @@
 <textarea id="address" placeholder="Adresse de livraison" required></textarea>
 
 <a class="cta" onclick="sendWhatsApp()">🔒 Commander via WhatsApp (confidentiel)</a>
-<a class="cta-secondary" onclick="sendAccompagnement()">🤝 Demander un accompagnement personnalisé</a>
+<a class="cta-secondary" onclick="sendAccompagnement()">🤝 Je souhaite un accompagnement</a>
 <a class="cta-tertiary" href="index.html">🔙 Voir nos autres protocoles</a>
 
 <p class="note">
@@ -274,7 +255,7 @@ function sendWhatsApp(){
 
 function sendAccompagnement(){
   const message =
-    "Bonjour,%0A%0AJe souhaite un accompagnement personnalisé pour le protocole Hémorroïdes.";
+    "Bonjour,%0A%0AJe souhaite un accompagnement pour le protocole Hémorroïdes.";
   window.open("https://wa.me/212752789277?text=" + message, "_blank");
 }
 </script>
