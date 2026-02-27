@@ -63,7 +63,6 @@
       border-radius:8px;
       font-size:18px;
       font-weight:bold;
-      text-decoration:none;
       margin:15px 0;
       border:none;
       cursor:pointer;
@@ -88,7 +87,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,12 +109,12 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
   <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -127,26 +125,10 @@
   </div>
 
   <h1>i Vision</h1>
-  <p><strong>Complément alimentaire conçu pour soutenir la santé des yeux et le confort visuel au quotidien.</strong></p>
 
   <img src="https://i.postimg.cc/rsgD75fx/Screenshot-20260226-205047-Google.jpg"
        class="product-img"
        alt="i Vision">
-
-  <h2>Pourquoi choisir i Vision ?</h2>
-  <ul>
-    <li>✔️ Soutient la santé oculaire</li>
-    <li>✔️ Aide à protéger la vision</li>
-    <li>✔️ Contribue au confort visuel quotidien</li>
-    <li>✔️ Adapté en cas de fatigue visuelle prolongée</li>
-  </ul>
-
-  <p>
-    <strong>i Vision</strong> apporte des nutriments ciblés
-    pour accompagner les yeux face aux agressions quotidiennes
-    (écrans, lumière artificielle, fatigue),
-    et aider à préserver une vision confortable et protégée.
-  </p>
 
   <div class="price">Prix unitaire : 477 DH</div>
 
@@ -161,82 +143,33 @@
     <option value="5">5 boîtes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">477</span> DH
-  </div>
+  <div class="price">Total : <span id="total">477</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
   <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
-
-<hr>
-
-<section style="padding:20px; line-height:1.7; font-size:15px; max-width:700px; margin:auto; background:#fff;">
-
-  <h2>👁️ i VISION</h2>
-  <h3>Soutien nutritionnel pour les yeux</h3>
-
-  <p>
-    i Vision est formulé pour accompagner la santé visuelle,
-    notamment chez les personnes exposées
-    à une utilisation prolongée des écrans,
-    à la lumière artificielle
-    ou à la fatigue oculaire.
-  </p>
-
-  <p>
-    Il aide à préserver le confort des yeux,
-    à soutenir les fonctions visuelles normales
-    et à protéger la vision au quotidien.
-  </p>
-
-  <h3>🧴 Informations produit</h3>
-  <p><strong>Forme :</strong> Comprimés</p>
-
-  <h3>🧴 Conseils d’utilisation</h3>
-  <p>
-    Prendre selon les recommandations indiquées
-    sur l’emballage ou celles d’un professionnel de santé.
-  </p>
-
-  <h3>✨ Bienfaits</h3>
-  <ul>
-    <li>Soutient la santé des yeux</li>
-    <li>Aide à réduire l’inconfort visuel</li>
-    <li>Protège la vision face à la fatigue</li>
-    <li>Contribue au confort visuel quotidien</li>
-    <li><strong>Sans gluten</strong></li>
-  </ul>
-
-</section>
 
 <script>
 const unitPrice = 477;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -248,28 +181,39 @@ function addToCart(){
 }
 
 function sendWhatsApp(){
+
   if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
 
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : i Vision%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+`Bonjour,
 
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+Commande : i Vision
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodeURIComponent(message),
+    "_blank"
+  );
 }
 
-/* 🌍 Google Translate */
+/* Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -288,6 +232,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <hr>
