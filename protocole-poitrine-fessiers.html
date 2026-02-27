@@ -28,6 +28,20 @@
     h2{margin-top:30px;}
     ul{margin-left:20px;}
 
+    .lang-switch{
+      text-align:right;
+      padding:10px 15px;
+    }
+    .lang-switch button{
+      background:#eee;
+      border:1px solid #ccc;
+      border-radius:6px;
+      padding:6px 10px;
+      margin-left:6px;
+      cursor:pointer;
+      font-size:13px;
+    }
+
     .intro{
       background:#fff0f5;
       border-left:4px solid #c2185b;
@@ -161,17 +175,31 @@
 
 <body>
 
+<div class="lang-switch">
+  <button onclick="setLang('fr')">🇫🇷 FR</button>
+  <button onclick="setLang('ar')">🇲🇦 AR</button>
+</div>
+
 <div class="container">
 
-<h1>Protocole naturel poitrine & fessiers – Galbe et fermeté</h1>
-<h2>Approche naturelle douce avec accompagnement discret partout au Maroc</h2>
+<h1 data-fr="Protocole naturel poitrine & fessiers – Galbe et fermeté"
+    data-ar="بروتوكول طبيعي لتكبير الصدر والأرداف وتحسين التناسق">
+  Protocole naturel poitrine & fessiers – Galbe et fermeté
+</h1>
 
-<div class="intro">
-  Avec le temps, les variations hormonales ou après une grossesse, la poitrine et les fessiers
-  peuvent perdre en fermeté et en galbe.<br><br>
-  Ce protocole propose une <strong>approche naturelle d’accompagnement</strong>
-  visant à soutenir la tonicité, la nutrition des tissus et l’équilibre global du corps,
-  dans un cadre sérieux et discret.
+<h2 data-fr="Approche naturelle douce avec accompagnement discret partout au Maroc"
+    data-ar="مقاربة طبيعية لطيفة مع متابعة سرية في جميع أنحاء المغرب">
+  Approche naturelle douce avec accompagnement discret partout au Maroc
+</h2>
+
+<div class="intro"
+data-fr="Avec le temps, les variations hormonales ou après une grossesse, la poitrine et les fessiers peuvent perdre en fermeté et en galbe. Ce protocole propose une approche naturelle visant à soutenir la tonicité, la nutrition des tissus et l’équilibre global du corps."
+data-ar="مع مرور الوقت أو التغيرات الهرمونية أو بعد الحمل، قد يفقد الصدر والأرداف التماسك. هذا البروتوكول يعتمد على مقاربة طبيعية لدعم شد الأنسجة وتغذيتها وتحقيق توازن عام للجسم.">
+Avec le temps, les variations hormonales ou après une grossesse, la poitrine et les fessiers
+peuvent perdre en fermeté et en galbe.<br><br>
+Ce protocole propose une <strong>approche naturelle d’accompagnement</strong>
+visant à soutenir la tonicité, la nutrition des tissus et l’équilibre global du corps,
+dans un cadre sérieux et discret.
 </div>
 
 <h2>Produits inclus</h2>
@@ -184,14 +212,8 @@
 <h2>💗 Bienfaits du protocole</h2>
 <div class="benefits">
   <p><strong>Moisturizer</strong> : nourrit la peau, soutient l’élasticité et la douceur.</p>
-  <p><strong>Berry Nectar</strong> : riche en antioxydants, soutient la vitalité et la circulation.</p>
+  <p><strong>Berry Nectar</strong> : riche en antioxydants, soutient la vitalité.</p>
   <p><strong>Vitolize Femme</strong> : accompagne l’équilibre hormonal féminin.</p>
-</div>
-
-<h2>Pourquoi nos clientes nous font confiance</h2>
-<div class="testimonial">
-  “Une approche respectueuse et naturelle. J’ai apprécié le suivi et la discrétion.”
-  <br><strong>— Cliente, Rabat</strong>
 </div>
 
 <h2>Prix du protocole</h2>
@@ -208,60 +230,35 @@
   ⚠️ Approche naturelle – ce protocole ne constitue pas un traitement médical.
 </div>
 
-<h2>Questions fréquentes</h2>
-
-<div class="faq-item">
-  <h3>Les résultats sont-ils garantis ?</h3>
-  <p>Chaque organisme est différent. Ce protocole vise un accompagnement naturel et progressif.</p>
-</div>
-
-<div class="faq-item">
-  <h3>La livraison est-elle discrète ?</h3>
-  <p>Oui, emballage neutre et confidentialité totale.</p>
-</div>
-
 <h2>Commander le protocole</h2>
 
-<input type="text" id="name" placeholder="Nom et prénom" required>
-<input type="tel" id="phone" placeholder="Téléphone" required>
-<textarea id="address" placeholder="Adresse de livraison" required></textarea>
+<input type="text" id="name" placeholder="Nom et prénom">
+<input type="tel" id="phone" placeholder="Téléphone">
+<textarea id="address" placeholder="Adresse de livraison"></textarea>
 
-<a class="cta" onclick="sendWhatsApp()">🔒 Commander via WhatsApp (confidentiel)</a>
-<a class="cta-secondary" onclick="sendAccompagnement()">💬 Je souhaite un accompagnement</a>
+<a class="cta" onclick="sendWhatsApp()">🔒 Commander via WhatsApp</a>
 <a class="cta-tertiary" href="index.html">🔙 Voir nos autres protocoles</a>
 
 <p class="note">
-  Accompagnement discret avant, pendant et après le protocole. Livraison partout au Maroc.
+  Livraison discrète partout au Maroc – accompagnement avant et après commande.
 </p>
 
 </div>
 
 <script>
-function sendWhatsApp(){
-  const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
-
-  if(!name || !phone || !address){
-    alert("Merci de remplir tous les champs.");
-    return;
-  }
-
-  const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Protocole Poitrine & Fessiers%0A" +
-    "Total : 1085 DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
-
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+function setLang(lang){
+  document.querySelectorAll("[data-fr]").forEach(el=>{
+    el.innerHTML = el.getAttribute("data-"+lang);
+  });
+  document.body.dir = (lang === "ar") ? "rtl" : "ltr";
 }
-
-function sendAccompagnement(){
-  const message =
-    "Bonjour,%0A%0AJe souhaite un accompagnement pour le protocole Poitrine & Fessiers.";
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+function sendWhatsApp(){
+  const n = name.value.trim(), p = phone.value.trim(), a = address.value.trim();
+  if(!n||!p||!a){ alert("Merci de remplir tous les champs."); return; }
+  window.open(
+    "https://wa.me/212752789277?text=Commande%20Protocole%20Poitrine%20%26%20Fessiers%0A"+n+"%0A"+p+"%0A"+a,
+    "_blank"
+  );
 }
 </script>
 
