@@ -63,7 +63,6 @@
       border-radius:8px;
       font-size:18px;
       font-weight:bold;
-      text-decoration:none;
       margin:15px 0;
       border:none;
       cursor:pointer;
@@ -88,7 +87,6 @@
       margin-top:30px;
     }
 
-    /* 🌍 Traduction */
     #translate-box{
       position:fixed;
       top:12px;
@@ -111,12 +109,12 @@
 
 <body>
 
-<!-- 🌍 Traduction -->
 <div id="translate-box">
   🌍
   <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
   <a href="javascript:void(0)" onclick="setLang('en')">English</a>
 </div>
+
 <div id="google_translate_element" style="display:none;"></div>
 
 <div class="container">
@@ -127,26 +125,10 @@
   </div>
 
   <h1>Vitolize Women</h1>
-  <p><strong>Complément nutritionnel conçu pour soutenir l’énergie, l’équilibre et le bien-être féminin au quotidien.</strong></p>
 
   <img src="https://i.postimg.cc/gjNSx6BK/Screenshot-20260226-201314-Google.jpg"
        class="product-img"
        alt="Vitolize Women">
-
-  <h2>Pourquoi choisir Vitolize Women ?</h2>
-  <ul>
-    <li>✔️ Apporte des nutriments essentiels pour la femme</li>
-    <li>✔️ Soutient l’énergie et la vitalité quotidienne</li>
-    <li>✔️ Aide à maintenir l’équilibre féminin</li>
-    <li>✔️ Convient aux femmes actives à tout âge</li>
-  </ul>
-
-  <p>
-    <strong>Vitolize Women</strong> est formulé pour accompagner les besoins spécifiques
-    des femmes, notamment lors des périodes de fatigue,
-    de stress ou de déséquilibre,
-    afin de soutenir le bien-être général et la vitalité.
-  </p>
 
   <div class="price">Prix unitaire : 418 DH</div>
 
@@ -161,94 +143,33 @@
     <option value="5">5 boîtes</option>
   </select>
 
-  <div class="price">
-    Total : <span id="total">418</span> DH
-  </div>
+  <div class="price">Total : <span id="total">418</span> DH</div>
 
   <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
 
-  <div class="cart" id="cart">
-    Aucun produit ajouté.
-  </div>
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
 
   <h2>Informations de livraison</h2>
 
   <input type="text" id="name" placeholder="Nom et prénom">
-  <input type="text" id="phone" placeholder="Téléphone">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
   <textarea id="address" placeholder="Adresse de livraison"></textarea>
 
   <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
 
-  <a class="btn btn-secondary" href="index.html">
-    Voir tous nos autres produits
-  </a>
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
 
-  <footer>
-    © Équilibre Vitale – Tous droits réservés
-  </footer>
+  <footer>© Équilibre Vitale – Tous droits réservés</footer>
 
 </div>
-
-<hr>
-
-<section style="padding:20px; line-height:1.7; font-size:15px; max-width:700px; margin:auto; background:#fff;">
-
-  <h2>🌸 VITOLIZE WOMEN</h2>
-  <h3>Soutien nutritionnel pour l’équilibre féminin</h3>
-
-  <p>
-    Vitolize Women est un complément alimentaire
-    spécialement formulé pour répondre
-    aux besoins nutritionnels des femmes.
-    Il apporte des vitamines, minéraux
-    et extraits sélectionnés
-    pour accompagner l’énergie,
-    la vitalité et l’équilibre féminin.
-  </p>
-
-  <p>
-    Il est particulièrement apprécié
-    en période de fatigue,
-    de rythme soutenu,
-    de stress
-    ou lors de variations hormonales.
-  </p>
-
-  <h3>🧴 Composition</h3>
-  <p><strong>Forme :</strong> Comprimés</p>
-
-  <p>
-    Vitamines, minéraux essentiels,
-    extraits végétaux sélectionnés.
-    <br>
-    (Se référer à l’emballage
-    pour la liste complète des ingrédients.)
-  </p>
-
-  <h3>🧴 Conseils d’utilisation</h3>
-  <p>
-    Prendre <strong>1 comprimé par jour</strong>,
-    de préférence au cours d’un repas,
-    avec un verre d’eau.
-  </p>
-
-  <h3>✨ Bienfaits</h3>
-  <ul>
-    <li>Soutient l’énergie et la vitalité féminine</li>
-    <li>Contribue à l’équilibre nutritionnel</li>
-    <li>Aide au bien-être général</li>
-    <li>Accompagne les femmes actives au quotidien</li>
-  </ul>
-
-</section>
 
 <script>
 const unitPrice = 418;
 let cartQty = 0;
 
 function updateTotal(){
-  const qty = document.getElementById("qty").value;
-  document.getElementById("total").innerText = qty * unitPrice;
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
 }
 
 function addToCart(){
@@ -260,28 +181,39 @@ function addToCart(){
 }
 
 function sendWhatsApp(){
+
   if(cartQty === 0){
     alert("Veuillez ajouter le produit au panier.");
     return;
   }
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const address = document.getElementById("address").value;
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
 
   const message =
-    "Bonjour,%0A%0A" +
-    "Commande : Vitolize Women%0A" +
-    "Quantité : " + cartQty + " boîte(s)%0A" +
-    "Total : " + (cartQty * unitPrice) + " DH%0A%0A" +
-    "Nom : " + name + "%0A" +
-    "Téléphone : " + phone + "%0A" +
-    "Adresse : " + address;
+`Bonjour,
 
-  window.open("https://wa.me/212752789277?text=" + message, "_blank");
+Commande : Vitolize Women
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodeURIComponent(message),
+    "_blank"
+  );
 }
 
-/* 🌍 Google Translate */
+/* Google Translate */
 function googleTranslateElementInit(){
   new google.translate.TranslateElement(
     { pageLanguage:'fr', autoDisplay:false },
@@ -300,6 +232,11 @@ function setLang(lang){
   }, 300);
 }
 </script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
 
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <section id="vitolize-women" style="padding:20px; line-height:1.7; font-size:15px;">
