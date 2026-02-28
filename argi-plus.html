@@ -1,1 +1,343 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever Argi+ – Énergie & Performance</title>
 
+  <style>
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+    }
+    h1{color:#c62828;}
+    h2{margin-top:30px;}
+
+    .badge{
+      background:#fdecea;
+      color:#c62828;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
+    }
+
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:6px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
+    }
+
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-secondary{
+      background:#c62828;
+      font-size:15px;
+    }
+
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#c62828;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="translate-box">
+  🌍 
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+
+  <div class="badge">
+    ⚡ Énergie & circulation – Performance physique<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Forever Argi+ (300 g)</h1>
+
+  <img src="https://i.postimg.cc/j53Y354h/Screenshot-20260228-202636-Google.jpg"
+       class="product-img"
+       alt="Forever Argi Plus">
+
+  <div class="price">Prix unitaire : 935 DH</div>
+
+  <h2>Commander</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">Total : <span id="total">935</span> DH</div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
+
+  <footer>© Équilibre Vital – Tous droits réservés</footer>
+
+</div>
+
+<script>
+const unitPrice = 935;
+let cartQty = 0;
+
+function updateTotal(){
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Argi+</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp(){
+
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
+
+  const message =
+`Bonjour,
+
+Commande : Forever Argi+
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodedMessage,
+    "_blank"
+  );
+}
+
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<hr>
+
+<section id="arginine-argi-plus" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>💪 L’ARGININE ARGI+ FOREVER</h2>
+
+  <h3>Vitalité – Force – Endurance</h3>
+
+  <p>
+    L’Arginine Argi+ Forever est un <strong>complément alimentaire dédié à la vitalité,
+    à la force et à l’endurance</strong>, particulièrement adapté aux personnes actives,
+    aux sportifs et à toute personne souhaitant soutenir ses performances physiques
+    et son niveau d’énergie au quotidien.
+  </p>
+
+  <p>
+    Sa formule associe la <strong>L-arginine</strong> à un <strong>cocktail unique
+    d’extraits de fruits rouges</strong> naturellement riches en antioxydants,
+    tels que la grenade, la peau de raisin et le raisin rouge,
+    ainsi que le cassis, la framboise, la cerise et la mûre.
+  </p>
+
+  <p>
+    La grenade, reconnue pour sa richesse en polyphénols,
+    contribue à la protection des cellules contre le stress oxydatif.
+    Les extraits de fruits rouges complètent cette action
+    en soutenant l’organisme lors d’efforts intenses
+    ou de périodes de fatigue passagère.
+  </p>
+
+  <p>
+    L’Arginine Argi+ est un <strong>accompagnement idéal</strong>
+    lors d’efforts physiques soutenus,
+    d’entraînements intensifs,
+    de compétitions sportives
+    ou avant une activité physique exigeante.
+  </p>
+
+  <p>
+    Les vitamines <strong>C, B6 et B9</strong> présentes dans la formule
+    contribuent à un métabolisme énergétique optimal,
+    au bon rendement du glycogène
+    et participent à la réduction de la fatigue.
+  </p>
+
+  <p>
+    La L-arginine joue un rôle clé dans la production
+    de l’<strong>oxyde nitrique (NO)</strong>,
+    une molécule essentielle au bon fonctionnement de l’organisme.
+    Elle favorise une meilleure circulation sanguine,
+    améliorant ainsi l’apport en oxygène
+    et en nutriments vers les muscles,
+    ce qui soutient les performances,
+    l’énergie
+    et la croissance de la <strong>masse musculaire</strong>.
+  </p>
+
+  <p>
+    Argi+ Forever aide également à lutter
+    contre la fatigue passagère
+    et soutient la récupération après l’effort.
+  </p>
+
+  <h3>🧴 Composition du produit</h3>
+
+  <p>
+    <strong>Contenance :</strong>
+    Un sachet de <strong>300 g</strong>,
+    soit <strong>30 doses de 10 g</strong>.
+  </p>
+
+  <p>
+    L-Arginine Argi+ contient <strong>51 % de L-arginine</strong>
+    et un mélange d’extraits de fruits rouges :
+    peau de raisin,
+    raisin rouge,
+    cassis,
+    framboise,
+    cerise
+    et mûre.
+  </p>
+
+  <h3>🧴 Conseils d’utilisation</h3>
+
+  <p>
+    Mélanger <strong>une dosette</strong> de Forever Argi+
+    dans <strong>240 ml</strong> de boisson :
+    eau,
+    jus de fruits
+    ou pulpe d’aloe vera.
+  </p>
+
+  <h3>✨ Bienfaits de l’Arginine Argi+</h3>
+
+  <ul>
+    <li>Apporte force, vitalité et endurance.</li>
+    <li>Stimule le développement musculaire et améliore la tonicité.</li>
+    <li>Aide à la récupération après l’effort.</li>
+    <li>Améliore la circulation sanguine.</li>
+    <li>Favorise les performances sexuelles, l’érection chez l’homme et stimule la libido chez la femme.</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+</section>
+</body>
+</html>
