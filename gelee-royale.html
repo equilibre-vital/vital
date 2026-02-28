@@ -1,1 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forever Gelée Royale – Énergie & Défenses Naturelles</title>
 
+  <style>
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      margin:0;
+      background:#f7f9fb;
+      color:#222;
+    }
+    .container{
+      max-width:700px;
+      margin:auto;
+      background:#fff;
+      padding:20px;
+    }
+    h1{color:#f9a825;}
+    h2{margin-top:30px;}
+
+    .badge{
+      background:#fff8e1;
+      color:#f57f17;
+      padding:10px;
+      border-radius:6px;
+      margin-bottom:15px;
+      font-size:15px;
+    }
+
+    .product-img{
+      width:100%;
+      max-width:320px;
+      display:block;
+      margin:20px auto;
+      border-radius:6px;
+    }
+
+    .price{
+      font-size:22px;
+      font-weight:bold;
+      color:#d32f2f;
+      margin:15px 0;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:10px;
+      margin:6px 0 15px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:15px;
+    }
+
+    .btn{
+      display:block;
+      text-align:center;
+      background:#25d366;
+      color:#fff;
+      padding:15px;
+      border-radius:8px;
+      font-size:18px;
+      font-weight:bold;
+      margin:15px 0;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-secondary{
+      background:#f9a825;
+      font-size:15px;
+    }
+
+    .cart{
+      background:#f1f1f1;
+      padding:15px;
+      border-radius:8px;
+      margin-top:20px;
+    }
+
+    footer{
+      text-align:center;
+      font-size:13px;
+      color:#777;
+      margin-top:30px;
+    }
+
+    #translate-box{
+      position:fixed;
+      top:12px;
+      right:12px;
+      background:#f9a825;
+      color:#fff;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:13px;
+      z-index:9999;
+    }
+    #translate-box a{
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      margin:0 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="translate-box">
+  🌍 
+  <a href="javascript:void(0)" onclick="setLang('ar')">العربية</a> |
+  <a href="javascript:void(0)" onclick="setLang('en')">English</a>
+</div>
+
+<div id="google_translate_element" style="display:none;"></div>
+
+<div class="container">
+
+  <div class="badge">
+    🐝 Énergie, vitalité & défenses naturelles<br>
+    🚚 Livraison partout au Maroc – Paiement à la livraison
+  </div>
+
+  <h1>Forever Gelée Royale</h1>
+
+  <img src="https://i.postimg.cc/D0QT7K9C/Screenshot-20260228-221432-Google.jpg"
+       class="product-img"
+       alt="Forever Gelée Royale">
+
+  <div class="price">Prix unitaire : 539 DH</div>
+
+  <h2>Commander</h2>
+
+  <label>Quantité</label>
+  <select id="qty" onchange="updateTotal()">
+    <option value="1">1 boîte</option>
+    <option value="2">2 boîtes</option>
+    <option value="3">3 boîtes</option>
+    <option value="4">4 boîtes</option>
+    <option value="5">5 boîtes</option>
+  </select>
+
+  <div class="price">Total : <span id="total">539</span> DH</div>
+
+  <button class="btn" onclick="addToCart()">🛒 Ajouter au panier</button>
+
+  <div class="cart" id="cart">Aucun produit ajouté.</div>
+
+  <h2>Informations de livraison</h2>
+
+  <input type="text" id="name" placeholder="Nom et prénom">
+  <input type="text" id="phone" placeholder="Téléphone / WhatsApp">
+  <textarea id="address" placeholder="Adresse de livraison"></textarea>
+
+  <button class="btn" onclick="sendWhatsApp()">📲 Commander via WhatsApp</button>
+
+  <a class="btn btn-secondary" href="index.html">Voir tous nos autres produits</a>
+
+  <footer>© Équilibre Vital – Tous droits réservés</footer>
+
+</div>
+
+<script>
+const unitPrice = 539;
+let cartQty = 0;
+
+function updateTotal(){
+  document.getElementById("total").innerText =
+    document.getElementById("qty").value * unitPrice;
+}
+
+function addToCart(){
+  cartQty = document.getElementById("qty").value;
+  document.getElementById("cart").innerHTML =
+    "<strong>Forever Gelée Royale</strong><br>" +
+    "Quantité : " + cartQty + " boîte(s)<br>" +
+    "Total : " + (cartQty * unitPrice) + " DH";
+}
+
+function sendWhatsApp(){
+
+  if(cartQty === 0){
+    alert("Veuillez ajouter le produit au panier.");
+    return;
+  }
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if(!name || !phone || !address){
+    alert("Merci de remplir le nom, le téléphone et l’adresse.");
+    return;
+  }
+
+  const message =
+`Bonjour,
+
+Commande : Forever Gelée Royale
+Quantité : ${cartQty} boîte(s)
+Total : ${cartQty * unitPrice} DH
+
+Nom : ${name}
+Téléphone : ${phone}
+Adresse : ${address}`;
+
+  const encodedMessage = encodeURIComponent(message);
+
+  window.open(
+    "https://wa.me/212752789277?text=" + encodedMessage,
+    "_blank"
+  );
+}
+
+function googleTranslateElementInit(){
+  new google.translate.TranslateElement(
+    { pageLanguage:'fr', autoDisplay:false },
+    'google_translate_element'
+  );
+}
+
+function setLang(lang){
+  const interval = setInterval(() => {
+    const select = document.querySelector("select.goog-te-combo");
+    if(select){
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
+      clearInterval(interval);
+    }
+  }, 300);
+}
+</script>
+
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<hr>
+
+<section id="gelee-royale-forever" style="padding:20px; line-height:1.7; font-size:15px;">
+
+  <h2>🐝 GELÉE ROYALE FOREVER</h2>
+
+  <h3>Vitalité naturelle – Immunité – Énergie physique et intellectuelle</h3>
+
+  <p>
+    La <strong>Gelée Royale Forever</strong>, aussi appelée
+    <em>Forever Royal Jelly</em>,
+    est un complément alimentaire d’exception,
+    reconnu depuis toujours pour ses effets bénéfiques
+    sur la vitalité, l’immunité
+    et le bien-être général.
+  </p>
+
+  <p>
+    Produite naturellement par les abeilles,
+    la gelée royale est l’aliment exclusif de la reine,
+    ce qui explique sa longévité exceptionnelle
+    par rapport aux abeilles ouvrières.
+    Elle est considérée comme un véritable
+    <strong>concentré de nutriments royaux</strong>.
+  </p>
+
+  <p>
+    La gelée royale pure contient naturellement
+    des <strong>protéines, des sucres et des acides gras</strong>,
+    qui participent à la majorité de ses propriétés biologiques.
+    Elle est également riche en minéraux essentiels
+    tels que le calcium, le fer, le cuivre,
+    le magnésium, le phosphore,
+    le potassium, le silicium et le sodium,
+    ainsi qu’en vitamines du groupe B
+    (B1, B2/riboflavine et B12),
+    indispensables au bon fonctionnement de l’organisme.
+  </p>
+
+  <p>
+    La vitamine <strong>B12</strong> joue un rôle clé
+    dans le fonctionnement du cerveau,
+    le renouvellement cellulaire
+    et constitue un apport particulièrement intéressant
+    pour les personnes suivant un régime végétarien.
+  </p>
+
+  <p>
+    En tant que complément alimentaire,
+    la gelée royale est traditionnellement utilisée
+    pour aider à réduire les symptômes
+    de la <strong>fatigue physique et intellectuelle</strong>,
+    du stress
+    et pour soutenir l’organisme
+    lors des périodes de baisse de forme,
+    notamment en hiver.
+  </p>
+
+  <p>
+    Son action contribue à renforcer l’immunité,
+    à stimuler en douceur les défenses naturelles
+    et à soutenir l’équilibre général du corps.
+    La Gelée Royale Forever est ainsi
+    un véritable <strong>cocktail naturel de vitalité</strong>.
+  </p>
+
+  <p>
+    Les abeilles jouent un rôle essentiel
+    dans l’équilibre de notre écosystème
+    en pollinisant les fleurs.
+    Avec les nutriments issus de la ruche,
+    faites l’expérience du meilleur de la nature.
+  </p>
+
+  <p>
+    Forever propose également d’autres trésors de la ruche :
+    le <strong>Forever Bee Honey</strong>,
+    récolté à la main dans les montagnes d’Espagne,
+    la <strong>propolis</strong>,
+    utilisée par les abeilles pour protéger la ruche
+    grâce à ses propriétés antimicrobiennes,
+    et le <strong>Forever Bee Pollen</strong>,
+    riche en bioflavonoïdes et antioxydants,
+    sans conservateurs ni édulcorants.
+  </p>
+
+  <h3>✨ Bienfaits de la Gelée Royale Forever</h3>
+
+  <ul>
+    <li>Renforce le système immunitaire.</li>
+    <li>Stimule les capacités intellectuelles.</li>
+    <li>Aide à soulager les maux de tête.</li>
+    <li>Agit positivement sur le système cardiovasculaire.</li>
+    <li>Contribue à la régulation de la pression artérielle.</li>
+    <li><strong>Sans gluten</strong></li>
+  </ul>
+
+  <h3>🧴 Conseils d’utilisation</h3>
+
+  <p>
+    Prendre <strong>1 à 2 comprimés à croquer par jour</strong>.
+  </p>
+
+  <h3>🧪 Composition du produit</h3>
+
+  <p>
+    Édulcorants : sorbitol, fructose,
+    gelée royale lyophilisée,
+    acidifiant : acide citrique,
+    arôme naturel orange,
+    émulsifiant : acides gras,
+    antiagglomérants : sels de magnésium d’acides gras,
+    dioxyde de silicium.
+  </p>
+
+  <p>
+    Cette liste d’ingrédients peut faire l’objet de modifications.
+    Veuillez consulter l’emballage du produit acheté.
+  </p>
+
+</section>
+</body>
+</html>
